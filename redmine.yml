@@ -1,0 +1,10 @@
+---
+- name: redmine
+  hosts: all
+  remote_user: root
+
+  roles:
+    - { role: common , tags: "common"} 
+    - { role: nginx , tags: "nginx"}
+    - { role: mysql , tags: "mysql"}
+    - { role: redmine, tags: "redmine"}

@@ -1,0 +1,99 @@
+---
+
+- name: Install Ruby and depend
+  apt: 
+    name: [ruby,ruby-dev,libmysqlclient-dev,libmagickwand-dev]
+
+
+
+- name: Create dir
+  file:
+    path: /data/wwwroot
+    state: directory
+    mode: 0755
+   
+- name: Add redmine User
+  user:
+    name: redmine
+    shell: /usr/sbin/nologin
+    home: /data/wwwroot/redmine
+    create_home: no
+
+- name: download redmine 
+  unarchive:
+    src: '{{redmine_download_url}}'
+    dest: /data/wwwroot
+    remote_src: yes
+    owner: redmine
+    group: redmine
+
+- shell: mv /data/wwwroot/redmine-{{redmine_version}}  /data/wwwroot/redmine
+ 
+- name: Install bundler
+  gem:
+    name: bundler
+    user_install: no
+
+- include_vars: ../../mysql/defaults/main.yml
+
+- name: Create databases
+  mysql_db:
+    name: redmine 
+    login_user: root
+    login_password: '{{mysql_password}}'
+    encoding: utf8mb4
+
+- name: set databases config
+  template: 
+    src: database.yml
+    dest: /data/wwwroot/redmine/config
+
+- name: Additional dependencies
+  copy: src=Gemfile.local dest=/data/wwwroot/redmine/
+
+- name: bundler install required
+  bundler:
+    chdir: /data/wwwroot/redmine
+    extra_args: --without development test
+
+- name: Session store secret generation
+  command: bundle exec rake generate_secret_token
+  args:
+    chdir: /data/wwwroot/redmine
+
+- name: Database schema objects creation
+  shell: RAILS_ENV=production bundle exec rake db:migrate
+  args:
+    chdir: /data/wwwroot/redmine
+
+- name: Database default data set
+  shell: echo '{{lang}}' | RAILS_ENV=production bundle exec rake redmine:load_default_data 
+  args:
+    chdir: /data/wwwroot/redmine
+
+- name: make directory
+  file:
+    path: /data/wwwroot/redmine/{{item}}
+    owner: redmine 
+    group: redmine
+    state: directory
+    recurse: yes    
+    mode: 755
+  with_items:
+    - tmp/pdf
+    - tmp/pids
+    - public/plugin_assets
+
+- name: set redmine service
+  copy:
+    src: redmine.service
+    dest: /lib/systemd/system/redmine.service
+  notify: start redmine
+
+- name:  File system permissions
+  file: 
+    path: /data/wwwroot/redmine
+    owner: redmine 
+    group: redmine
+    state: directory
+    recurse: yes
