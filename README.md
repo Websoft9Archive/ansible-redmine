@@ -1,5 +1,5 @@
 # redmine
-Redmine Ubuntu Ansible Playbook
+Redmine Ubuntu18.04 Ansible Playbook
 
 Mysql 版本使用Ubuntu 默认源版本 
 
