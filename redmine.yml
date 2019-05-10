@@ -1,6 +1,6 @@
 ---
 - name: redmine
-  hosts: all
+  hosts: redmine
   remote_user: root
 
   roles:
