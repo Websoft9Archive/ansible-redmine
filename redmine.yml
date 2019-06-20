@@ -1,7 +1,7 @@
 ---
 - name: redmine
-  hosts: redmine
-  remote_user: root
+  hosts: server
+  remote_user: '{{admin_username}}'
 
   roles:
     - { role: common , tags: "common"} 
