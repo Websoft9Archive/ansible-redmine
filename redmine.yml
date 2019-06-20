@@ -1,6 +1,6 @@
 ---
 - name: redmine
-  hosts: server
+  hosts: all
   remote_user: '{{admin_username}}'
 
   roles:
