@@ -88,7 +88,9 @@
   copy:
     src: redmine.service
     dest: /lib/systemd/system/redmine.service
-  notify: start redmine
+
+- name: start redmine
+  service: name=redmine state=started enabled=yes
 
 - name:  File system permissions
   file: 
