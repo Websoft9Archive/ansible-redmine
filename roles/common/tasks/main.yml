@@ -1,32 +1,21 @@
 ---
-
-- name: APT update
-  command: apt update
-
 - name: Upgrade all packages to the latest version
   apt:
     name: "*"
     state: latest
+    update_cache: yes
     force_apt_get: True
-
-
-- name: Remove dependencies that are no longer required
-  apt:
     autoremove: yes
-
 
 - name: Install Common Software
   apt: 
-    name: [wget,openssl,unzip,bzip2,expect,at,vim, screen, git, htop,imagemagick, goaccess,python3-mysqldb,python-mysqldb,python-pip,unattended-upgrades]
+    name: [wget,openssl,unzip,bzip2,expect,at,vim,screen,git,htop,imagemagick,goaccess,python3-mysqldb,python-mysqldb,python-pip,python3-pip,unattended-upgrades,python3-pexpect,python-pexpect]
     state: latest
     force_apt_get: True
     allow_unauthenticated: yes
-  
 
 - name: Configuration unattended-upgrades
   copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/
-
-
 
 - block:
   - name: Create swap Space
@@ -46,6 +35,22 @@
         state: present
   when: (ansible_swaptotal_mb == 0) and (cloud != 'azure')
   
+- block:
+  - name: ResourceDisk EnableSwap
+    lineinfile:
+      dest: /etc/waagent.conf
+      regexp: 'ResourceDisk.EnableSwap=n'
+      line: "ResourceDisk.EnableSwap=y"
+      state: present
+
+  - name: ResourceDisk SwapSizeMB
+    lineinfile:
+      dest: /etc/waagent.conf
+      regexp: 'ResourceDisk.SwapSizeMB=0'
+      line: "ResourceDisk.SwapSizeMB=2048"
+      state: present
+  when: cloud == 'azure'
+
 - name: Set swapiness
   sysctl:
     name: vm.swappiness
