@@ -1,6 +1,9 @@
 ---
 - name: redmine
   hosts: all
+  become: yes
+  become_method: sudo
+  become_user: root
   remote_user: '{{admin_username}}'
 
   roles:
