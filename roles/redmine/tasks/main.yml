@@ -1,59 +1,52 @@
----
+# ---
+# - name: Add redmine User
+#   user:
+#     name: redmine
+#     shell: /usr/sbin/nologin
+#     home: /data/wwwroot/redmine
+#     create_home: no
 
-- name: Install Ruby and depend
-  apt: 
-    name: [ruby,ruby-dev,libmysqlclient-dev,libmagickwand-dev]
+# - name: download redmine 
+#   unarchive:
+#     src: '{{redmine_download_url}}'
+#     dest: /data/wwwroot
+#     remote_src: yes
+#     owner: redmine
+#     group: redmine
 
-
-
-- name: Create dir
-  file:
-    path: /data/wwwroot
-    state: directory
-    mode: 0755
-   
-- name: Add redmine User
-  user:
-    name: redmine
-    shell: /usr/sbin/nologin
-    home: /data/wwwroot/redmine
-    create_home: no
-
-- name: download redmine 
-  unarchive:
-    src: '{{redmine_download_url}}'
-    dest: /data/wwwroot
-    remote_src: yes
-    owner: redmine
-    group: redmine
-
-- shell: mv /data/wwwroot/redmine-{{redmine_version}}  /data/wwwroot/redmine
- 
-- name: Install bundler
-  gem:
-    name: bundler
-    user_install: no
+# - shell: mv /data/wwwroot/redmine-{{redmine_version}}  /data/wwwroot/redmine
 
 - include_vars: ../../mysql/defaults/main.yml
 
-- name: Create databases
-  mysql_db:
-    name: redmine 
-    login_user: root
-    login_password: '{{mysql_password}}'
-    encoding: utf8mb4
+# - name: Create databases
+#   mysql_db:
+#     name: redmine 
+#     login_user: root
+#     login_password: '{{mysql_password}}'
+#     encoding: utf8mb4
 
-- name: set databases config
-  template: 
-    src: database.yml
-    dest: /data/wwwroot/redmine/config
+# - name: Create user called redmine in mysql
+#   mysql_user:
+#     name: redmine
+#     password: '{{mysql_password}}'
+#     login_user: root
+#     login_password: '{{mysql_password}}'
+#     priv: 'redmine.*:ALL'
+#     state: present
 
-- name: Additional dependencies
-  copy: src=Gemfile.local dest=/data/wwwroot/redmine/
+# - name: set databases config
+#   template: 
+#     src: database.yml
+#     dest: /data/wwwroot/redmine/config
+
+# - name: Additional dependencies
+#   copy: src=Gemfile.local dest=/data/wwwroot/redmine/
 
 - name: bundler install required
   bundler:
+    state: present
     chdir: /data/wwwroot/redmine
+    gemfile: /data/wwwroot/redmine/Gemfile
     extra_args: --without development test
 
 - name: Session store secret generation
@@ -99,3 +92,7 @@
     group: redmine
     state: directory
     recurse: yes
+
+# TODO: 设置nginx端口转发
+
+# TODO: 随机密码

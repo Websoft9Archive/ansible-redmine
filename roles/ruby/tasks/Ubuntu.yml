@@ -1,0 +1,14 @@
+- name: Add the PPA
+  apt_repository:
+    repo: ppa:brightbox/ruby-ng
+
+- name: Install Ruby
+  apt:
+    name: ['ruby{{ruby_version}}','ruby{{ruby_version}}-dev']
+
+- name: Install Bundler
+  gem:
+    name: bundler
+    state: present
+  
+    

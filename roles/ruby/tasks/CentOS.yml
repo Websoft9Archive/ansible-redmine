@@ -1,0 +1,26 @@
+# - name: Get Version
+#   shell: echo "{{ruby_ver}}*10" | bc -l -q | sed 's/\.[0-9]\+//g'
+#   register: rubyver
+
+# - name: Add SCL repo
+#   yum:
+#     name: centos-release-scl-rh
+
+# - name: Install Ruby
+#   yum:
+#     name: ["rh-ruby{{rubyver.stdout}}","rh-ruby{{rubyver.stdout}}-ruby-devel","rh-ruby{{rubyver.stdout}}-ruby-libs"]
+
+# - name: Set Setup
+#   template:
+#     src: rh-ruby.sh.jinja2
+#     dest: /etc/profile.d/rh-ruby.sh
+
+
+# - name: ruby version
+#   shell: ruby -v
+
+# - name: Install Bundler
+#   gem:
+#     name: bundler
+
+- debug: msg="Not Support Centos"
