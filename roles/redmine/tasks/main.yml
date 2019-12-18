@@ -1,46 +1,46 @@
-# ---
-# - name: Add redmine User
-#   user:
-#     name: redmine
-#     shell: /usr/sbin/nologin
-#     home: /data/wwwroot/redmine
-#     create_home: no
+---
+- name: Add redmine User
+  user:
+    name: redmine
+    shell: /usr/sbin/nologin
+    home: /data/wwwroot/redmine
+    create_home: no
 
-# - name: download redmine 
-#   unarchive:
-#     src: '{{redmine_download_url}}'
-#     dest: /data/wwwroot
-#     remote_src: yes
-#     owner: redmine
-#     group: redmine
+- name: download redmine 
+  unarchive:
+    src: '{{redmine_download_url}}'
+    dest: /data/wwwroot
+    remote_src: yes
+    owner: redmine
+    group: redmine
 
-# - shell: mv /data/wwwroot/redmine-{{redmine_version}}  /data/wwwroot/redmine
+- shell: mv /data/wwwroot/redmine-{{redmine_version}}  /data/wwwroot/redmine
 
 - include_vars: ../../mysql/defaults/main.yml
 
-# - name: Create databases
-#   mysql_db:
-#     name: redmine 
-#     login_user: root
-#     login_password: '{{mysql_password}}'
-#     encoding: utf8mb4
+- name: Create databases
+  mysql_db:
+    name: redmine 
+    login_user: root
+    login_password: '{{mysql_password}}'
+    encoding: utf8mb4
 
-# - name: Create user called redmine in mysql
-#   mysql_user:
-#     name: redmine
-#     password: '{{mysql_password}}'
-#     login_user: root
-#     login_password: '{{mysql_password}}'
-#     priv: 'redmine.*:ALL'
-#     state: present
+- name: Create user called redmine in mysql
+  mysql_user:
+    name: redmine
+    password: '{{mysql_password}}'
+    login_user: root
+    login_password: '{{mysql_password}}'
+    priv: 'redmine.*:ALL'
+    state: present
 
-# - name: set databases config
-#   template: 
-#     src: database.yml
-#     dest: /data/wwwroot/redmine/config
+- name: set databases config
+  template: 
+    src: database.yml
+    dest: /data/wwwroot/redmine/config
 
-# - name: Additional dependencies
-#   copy: src=Gemfile.local dest=/data/wwwroot/redmine/
+- name: Additional dependencies
+  copy: src=Gemfile.local dest=/data/wwwroot/redmine/
 
 - name: bundler install required
   bundler:
