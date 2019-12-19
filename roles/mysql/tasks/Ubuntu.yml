@@ -1,7 +1,15 @@
 ---
 - name: Install MySQL
   apt:  
+<<<<<<< HEAD
     name: [mysql-server,python-pymysql]
+=======
+    name: [mysql-server,libmysqlclient-dev, libssl-dev, libffi-dev, python-dev]
+
+- name: pip requirements
+  pip:
+    name: [MySQL-python]
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
 
 - name: Change MySQL Directory
   shell: |
@@ -18,28 +26,48 @@
   mysql_user: 
     name: root 
     host: localhost
+<<<<<<< HEAD
     password: "{{mysql_root_password | default(Websoft9,true)}}"
+=======
+    password: "{{mysql_password}}"
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
 
 - name: Removes all anyelse user accounts
   mysql_user:
     login_user: root
+<<<<<<< HEAD
     login_password: "{{mysql_root_password | default(Websoft9,true)}}"
+=======
+    login_password: "{{mysql_password}}"
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
     name: ''
     host_all: yes
     state: absent
 
 - name: Remove hostname user accounts
+<<<<<<< HEAD
   mysql_user: login_user=root login_password={{mysql_root_password | default(Websoft9,true)}} name='root' host={{ ansible_nodename }} state=absent
+=======
+  mysql_user: login_user=root login_password={{mysql_password}} name='root' host={{ ansible_nodename }} state=absent
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
 
 - name: Removes test Databases
   mysql_db:
     login_user: root
+<<<<<<< HEAD
     login_password: "{{mysql_root_password | default(Websoft9,true)}}"
+=======
+    login_password: "{{mysql_password}}"
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
     name: test
     state: absent
 
 - name: Removing privileges on test database
+<<<<<<< HEAD
   command: mysql -uroot -p{{mysql_root_password | default(Websoft9,true)}} -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
+=======
+  command: mysql -uroot -p{{mysql_password}} -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
 
 - name: del mysql Automatically generated for Debian scripts.
   file:
@@ -54,8 +82,12 @@
     state: link
   with_items:
     - {src: '/etc/mysql/mysql.conf.d/mysqld.cnf',dest: /data/config/mysqld.cnf}  
+<<<<<<< HEAD
     - {src: '/var/log/mysql',dest: '/data/logs/mysqld'}
 
 
 - set_fact:
     db_service_name: mysql
+=======
+    - {src: '/var/log/mysql',dest: '/data/logs/mysqld'}
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7

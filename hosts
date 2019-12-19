@@ -1,2 +1,2 @@
 [redmine]
-114.116.168.97   ansible_ssh_user=root  ansible_ssh_pass=Qwer1234 ansible_python_interpreter=/usr/bin/python3
+47.56.137.76   ansible_ssh_user=root  ansible_ssh_pass=Qwerty123456  ansible_sudo_pass=Qwerty123456

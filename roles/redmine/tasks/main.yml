@@ -1,17 +1,4 @@
 ---
-
-- name: Install Ruby and depend
-  apt: 
-    name: [ruby,ruby-dev,libmysqlclient-dev,libmagickwand-dev]
-
-
-
-- name: Create dir
-  file:
-    path: /data/wwwroot
-    state: directory
-    mode: 0755
-   
 - name: Add redmine User
   user:
     name: redmine
@@ -27,12 +14,7 @@
     owner: redmine
     group: redmine
 
-- shell: mv /data/wwwroot/redmine-{{redmine_version}}  /data/wwwroot/redmine
- 
-- name: Install bundler
-  gem:
-    name: bundler
-    user_install: no
+- shell: mv /data/wwwroot/redmine-*  /data/wwwroot/redmine
 
 - include_vars: ../../mysql/defaults/main.yml
 
@@ -42,6 +24,15 @@
     login_user: root
     login_password: '{{mysql_password}}'
     encoding: utf8mb4
+
+- name: Create user called redmine in mysql
+  mysql_user:
+    name: redmine
+    password: '{{mysql_password}}'
+    login_user: root
+    login_password: '{{mysql_password}}'
+    priv: 'redmine.*:ALL'
+    state: present
 
 - name: set databases config
   template: 
@@ -53,8 +44,9 @@
 
 - name: bundler install required
   bundler:
+    state: present
     chdir: /data/wwwroot/redmine
-    extra_args: --without development test
+    extra_args: --without development test rmagick
 
 - name: Session store secret generation
   command: bundle exec rake generate_secret_token
@@ -99,3 +91,15 @@
     group: redmine
     state: directory
     recurse: yes
+
+## 设置nginx端口转发
+- name: copy nginx configuration file
+  copy:
+    src: default.conf
+    dest: /etc/nginx/conf.d/default.conf
+    mode: 0755
+
+- name: restart nginx
+  service: name=nginx  state=restarted
+
+# TODO: 随机密码

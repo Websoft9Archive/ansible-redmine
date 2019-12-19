@@ -1,6 +1,11 @@
 [mysql-community]
+<<<<<<< HEAD
 name=MySQL {{mysql_version}} Community Server
 baseurl=http://repo.mysql.com/yum/mysql-{{mysql_version}}-community/el/{{ansible_distribution_major_version}}/$basearch/
+=======
+name=MySQL {{mysqlver}} Community Server
+baseurl=http://repo.mysql.com/yum/mysql-{{mysqlver}}-community/el/{{ansible_distribution_major_version}}/$basearch/
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql

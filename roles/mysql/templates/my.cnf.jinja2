@@ -1,7 +1,11 @@
 [mysqld]
 datadir=/data/mysql
 socket=/var/lib/mysql/mysql.sock
+<<<<<<< HEAD
 {% if mysql_version == 5.7 or mysql_version == '5.7' %}
+=======
+{% if mysqlver == 5.7 or mysqlver == '5.7' %}
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
 #validate_password=OFF
 {% endif %}
 init-connect = 'SET NAMES utf8mb4'
@@ -49,7 +53,11 @@ myisam_max_sort_file_size = 10G
 myisam_repair_threads = 1
 interactive_timeout = 28800
 wait_timeout = 28800
+<<<<<<< HEAD
 {% if mysql_version == 5.7 or mysql_version == '5.7' %}
+=======
+{% if mysqlver == 5.7 or mysqlver == '5.7' %}
+>>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7
 default_authentication_plugin=mysql_native_password
 {% endif %}
 
