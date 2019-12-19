@@ -4,10 +4,8 @@
 - import_tasks: Ubuntu.yml
   when: ansible_distribution == 'Ubuntu'
 
-
-- name: Check MySQL Version
-  shell: mysql -V
-  register: mysql_ver
-  notify: MySQL Version
-
+- name: Check ruby Version
+  shell: ruby -v
+  register: ruby_ver
+  notify: Ruby Version
 
