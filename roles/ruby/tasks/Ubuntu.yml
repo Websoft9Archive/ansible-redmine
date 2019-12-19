@@ -7,8 +7,6 @@
     name: ['ruby{{ruby_version}}','ruby{{ruby_version}}-dev']
 
 - name: Install Bundler
-  gem:
-    name: bundler
-    state: present
+  shell: gem install bundler
   
     
