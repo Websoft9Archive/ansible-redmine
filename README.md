@@ -3,6 +3,8 @@
 
 *注意事项*
 
+操作系统: Ubuntu 18.04
+
 变量:
 
   redmine_download_url: http://xxx 下载链接
