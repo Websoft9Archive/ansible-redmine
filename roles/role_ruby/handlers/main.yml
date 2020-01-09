@@ -1,0 +1,3 @@
+- name: Ruby Version
+  debug:
+    var: ruby_ver.stdout

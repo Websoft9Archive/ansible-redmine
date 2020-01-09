@@ -1,10 +1,15 @@
 ---
+- name: Install requirements
+  apt:
+    name: [libxml2-dev,libmysqlclient-dev,libssl-dev]
+
 - name: Add redmine User
   user:
     name: redmine
     shell: /usr/sbin/nologin
     home: /data/wwwroot/redmine
     create_home: no
+
 
 - name: download redmine 
   unarchive:
@@ -15,24 +20,6 @@
     group: redmine
 
 - shell: mv /data/wwwroot/redmine-*  /data/wwwroot/redmine
-
-- include_vars: ../../mysql/defaults/main.yml
-
-- name: Create databases
-  mysql_db:
-    name: redmine 
-    login_user: root
-    login_password: '{{mysql_password}}'
-    encoding: utf8mb4
-
-- name: Create user called redmine in mysql
-  mysql_user:
-    name: redmine
-    password: '{{mysql_password}}'
-    login_user: root
-    login_password: '{{mysql_password}}'
-    priv: 'redmine.*:ALL'
-    state: present
 
 - name: set databases config
   template: 
@@ -59,7 +46,7 @@
     chdir: /data/wwwroot/redmine
 
 - name: Database default data set
-  shell: echo '{{lang}}' | RAILS_ENV=production bundle exec rake redmine:load_default_data 
+  shell: echo '{{redmine_lang}}' | RAILS_ENV=production bundle exec rake redmine:load_default_data 
   args:
     chdir: /data/wwwroot/redmine
 

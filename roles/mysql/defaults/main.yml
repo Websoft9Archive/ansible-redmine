@@ -1,9 +1,0 @@
-<<<<<<< HEAD
-mysql_version: 5.6       # centos版本 5.5 5.6 5.7  Ubuntu支持5.7和8.0
-mysqlcluster_version: 7.6   # 7.5 7.6 8.0
-
-=======
-mysqlver: 5.6       # centos版本 5.5 5.6 5.7  Ubuntu支持5.7和8.0
-mysqlcluster_version: 7.6   # 7.5 7.6 8.0
-mysql_password: 123456 # mysql 默认密码
->>>>>>> 950551f1bbd9378b70ecc1ad2300dbf0006fdbf7

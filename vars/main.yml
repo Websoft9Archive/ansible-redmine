@@ -1,0 +1,36 @@
+redmine_download_url: http://www.redmine.org/releases/redmine-4.0.5.tar.gz
+redmine_lang: zh
+
+mysql_version: 5.6    
+mysql_root_password: 123456  
+# 新建数据库
+mysql_databases: 
+  - name: redmine
+
+# 新建数据库用户
+mysql_users: 
+  - name: redmine
+    host: localhost
+    password: 123456
+    priv: 'redmine.*:ALL'
+
+init_db: 
+  mysql:
+    user: root
+    password: 123456
+
+init_application:
+  application_name: redmine
+  application_service: redmine
+  application_database: redmine
+  application_database_user: redmine
+  application_database_host: 127.0.0.1
+  application_database_password: 123456
+  application_random_password: True #True or False
+  application_random_password_method: 
+    - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
+    - mysql -uredmine -p$new_password -e "use redmine;update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"
+    - systemctl restart redmine
+  application_config_path:
+    - /data/wwwroot/redmine/config/database.yml
+

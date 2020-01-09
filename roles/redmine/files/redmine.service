@@ -5,8 +5,7 @@ After=nginx.service
 Environment=RAILS_ENV=production
 Type=simple
 WorkingDirectory=/data/wwwroot/redmine
-ExecStart=/usr/bin/ruby /data/wwwroot/redmine/bin/bundle exec /usr/local/bin/puma -b tcp://127.0.0.1:9292 -d
+ExecStart=/usr/local/bin/puma -b tcp://127.0.0.1:9292 -e production 
 User=redmine
-Restart=on-failure
 [Install]
 WantedBy=multi-user.target

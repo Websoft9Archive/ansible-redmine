@@ -1,25 +1,19 @@
 ---
-# 服务器前置任务(ubuntu使用 Centos项目注释或删掉)
-- name: pre-install python
-  hosts: all
-  become: yes
-  become_method: sudo
-  gather_facts: False
-  pre_tasks:
-    - name: Install Python
-      raw: sudo apt update && sudo apt-get -y install python
-      ignore_errors: yes
-
 # 安装redmine
 - name: redmine
   hosts: all
   become: yes
   become_method: sudo
   become_user: root
+  vars_files: 
+    - vars/main.yml
 
   roles:
-    - { role: common, tags: "common"} 
-    - { role: nginx, tags: "nginx"}
-    - { role: mysql, tags: "mysql"}
-    - { role: ruby, tags: "ruby" }
-    - { role: redmine, tags: "redmine"}
+    - role: role_common
+    - role: role_nginx
+    - role: role_mysql
+    - role: role_ruby
+    - role: redmine      
+    - role: role_docker
+    - role: role_docker_phpmyadmin
+    - role: role_init_password     

@@ -1,2 +1,2 @@
 [redmine]
-47.56.137.76   ansible_ssh_user=root  ansible_ssh_pass=Qwerty123456  ansible_sudo_pass=Qwerty123456
+40.71.29.23  ansible_ssh_user=websoft9  ansible_ssh_pass=Qwer12345678  ansible_sudo_pass=Qwer12345678
