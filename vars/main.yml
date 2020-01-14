@@ -20,17 +20,19 @@ init_db:
     password: 123456
 
 init_application:
-  application_name: redmine
-  application_service: redmine
-  application_database: redmine
-  application_database_user: redmine
-  application_database_host: 127.0.0.1
-  application_database_password: 123456
-  application_random_password: True #True or False
-  application_random_password_method: 
-    - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
-    - mysql -uredmine -p$new_password -e "use redmine;update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"
-    - systemctl restart redmine
-  application_config_path:
-    - /data/wwwroot/redmine/config/database.yml
+  redmine:
+    service: redmine
+    database: redmine
+    database_user: redmine
+    database_host: 127.0.0.1
+    database_password: 123456
+    random_password: True #True or False
+    default_account: admin
+    default_password: admin
+    random_password_method: 
+        - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
+        - mysql -uredmine -p$new_password -e "use redmine;update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"
+        - systemctl restart redmine
+    config_path:
+        - /data/wwwroot/redmine/config/database.yml
 

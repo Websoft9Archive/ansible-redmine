@@ -22,7 +22,7 @@
 - shell: mv /data/wwwroot/redmine-*  /data/wwwroot/redmine
 
 - name: set databases config
-  template: 
+  copy: 
     src: database.yml
     dest: /data/wwwroot/redmine/config
 

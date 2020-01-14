@@ -1,7 +1,0 @@
-production:
-  adapter: mysql2
-  database: {{init_application.application_database}}
-  host: {{init_application.application_database_host}}
-  username: {{init_application.application_database_user}}
-  password: {{init_application.application_database_password}}
-  encoding: utf8mb4

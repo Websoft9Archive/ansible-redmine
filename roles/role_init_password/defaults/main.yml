@@ -1,7 +1,7 @@
 init_db: 
-  mysql:
-    user: root
-    password: 123456
+  # mysql:
+  #   user: root
+  #   password: 123456
 
   # postgrepsql:
   #   user: postgres
@@ -13,14 +13,18 @@ init_db:
 
 
 init_application:
-  application_name: 
-  application_service:
-  application_database: 
-  application_database_user:
-  application_database_host: 
-  application_database_password: 
-  application_random_password: #True or False
-  application_random_password_method: 
-  application_config_path: []
+  # redmine: 
+  #   service: redmine
+  #   database: redmine
+  #   database_user: redmine
+  #   database_host: 127.0.0.1
+  #   database_password: redmine
+  #   default_account: admin
+  #   default_password: admin
+  #   random_password: True #True or False
+  #   random_password_method: 
+  #     - xxx/xxx/xxx
+  #   config_path: 
+  #     - /data/config/1.config
 
 
