@@ -10,10 +10,12 @@
 
   roles:
     - role: role_common
+    - role: role_cloud
     - role: role_nginx
     - role: role_mysql
     - role: role_ruby
     - role: redmine      
     - role: role_docker
     - role: role_docker_phpmyadmin
-    - role: role_init_password     
+    - role: role_init_password  
+    - role: role_end   
