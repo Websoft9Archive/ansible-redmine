@@ -13,18 +13,16 @@ init_db:
 
 
 init_application:
-  # redmine: 
-  #   service: redmine
-  #   database: redmine
-  #   database_user: redmine
-  #   database_host: 127.0.0.1
-  #   database_password: redmine
-  #   default_account: admin
-  #   default_password: admin
-  #   random_password: True #True or False
-  #   random_password_method: 
-  #     - xxx/xxx/xxx
-  #   config_path: 
-  #     - /data/config/1.config
+  application:  # application name
+    service: 
+    database: 
+    database_user: 
+    database_host: 
+    database_password: 
+    default_account: 
+    default_password: 
+    random_password:  #True or False
+    random_password_method: 
+    config_path: 
 
 
