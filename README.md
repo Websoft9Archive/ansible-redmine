@@ -17,7 +17,7 @@
 
 ## 本项目安装的是 Redmine 最新版吗？
 
-本项目采用官方提供的源码下载安装，通过修改[redmine_download_url](/roles/redmine/defaults/main.yaml)字段来维护所下载的地址。  
+本项目采用官方提供的源码下载安装，通过修改`[redmine_download_url](/roles/redmine/defaults/main.yaml)`字段来维护所下载的地址。  
 
 如何获取下载地址？官方[下载页面](https://www.redmine.org/projects/redmine/wiki/Download)  
 
