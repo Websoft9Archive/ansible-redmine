@@ -1,13 +1,28 @@
 ---
 # 安装redmine
-- name: redmine
+- name: Redmine
   hosts: all
   become: yes
   become_method: sudo
   become_user: root
+  gather_facts: True
+
+  vars_prompt:
+    - name: 'redmine_language_number'
+      prompt: "\nPlease choose the number for Redmine language [ 1/2] \n
+      1: English\n
+      2: Chinese\n"
+      private: no
+      default: 1
+  
+  vars:
+    temp_ver:
+      '1': 'en'
+      '2': 'zh'
+    redmine_lang: "{{temp_ver[redmine_language_number]}}" 
+
   vars_files: 
     - vars/main.yml
-  
 
   roles:
     - role: role_common
