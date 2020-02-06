@@ -8,12 +8,19 @@
     template:
       src: docker.repo.jinja2
       dest: /etc/yum.repos.d/docker.repo
+    when: ansible_distribution != 'Amazon'
         
+
   - name: Install Docker
     yum:
       name: [docker-ce,docker-ce-cli,containerd.io]
+    when: ansible_distribution != 'Amazon'
     
-  when: ansible_distribution == 'CentOS'
+  - name: Install Docker
+    shell: amazon-linux-extras install docker -y
+    when: ansible_distribution == 'Amazon'
+
+  when: ansible_os_family == 'RedHat'
 
   # # Ubuntu
 - block:
@@ -36,7 +43,7 @@
     apt:
       name: [docker-ce,docker-ce-cli,containerd.io]
         
-  when: ansible_distribution == 'Ubuntu'
+  when: ansible_os_family == 'Debian'
 
 - name: pip requirements
   pip:
@@ -45,7 +52,7 @@
 - name: pip requirements II
   pip:
     name: docker-compose
-  when: ansible_python.version.major == 3
+    executable: pip3
 
 - name: Started Docker
   service:
