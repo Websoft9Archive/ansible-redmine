@@ -21,7 +21,30 @@ Redmine 域名绑定操作步骤（[官方文档](https://docs.gitlab.com/omnibu
    sudo gitlab-ctl reconfigure
    ```
 
+## 插件
 
-## 迁移
+### 安装插件
 
-暂无
+1. 使用 SFTP 工具连接服务器  
+2. 下载插件到 */data/wwwroot/redmine/plugins*  
+3. cd 到 */data/wwwroot/redmine* 目录下执行命令
+   ```
+   bundle exec rake redmine:plugins:migrate RAILS_ENV=production
+   ```
+4. 重启服务
+   ```
+   sudo systemctl restart nginx
+   ```
+5. 登陆 Redmine 查看插件是否安装好
+
+
+### 卸载插件
+
+1. 使用 SFTP 工具连接服务器  
+2. cd 到 */data/wwwroot/redmine* 目录下执行命令
+   ```
+   bundle exec rake redmine:plugins:migrate NAME=plugin_name VERSION=0 RAILS_ENV=production   #  plugin_name 为插件名称
+   ```
+3. 使用 SFTP 删除 /data/wwwroot/redmine/plugins 对应的插件
+
+4. 重启服务

@@ -13,7 +13,7 @@
 | 操作系统       | Ubuntu18.04       |    |
 | 公有云| AWS, Azure, 阿里云, 华为云, 腾讯云 |  |
 | 私有云|  KVM, VMware, VirtualBox, OpenStack |  |
-| 服务器配置 | 最低1核1G，安装时所需的带宽不低于10M |  建议采用按量100M带宽 |
+| 服务器配置 | 最低1核2G，安装时所需的带宽不低于10M |  建议采用按量100M带宽 |
 
 ## 组件
 
@@ -59,4 +59,4 @@ wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/i
 ## To do
 
 * 支持 Centos，Amazon Linux
-* 默认预装redmine重要组件
+* 默认预装redmine重要插件

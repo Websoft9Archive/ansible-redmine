@@ -29,14 +29,14 @@ MySQL 配置文件: *etc/my.cnf*
 MySQL 数据目录：*/data/mysql*   
 MySQL 日志文件: */var/log/mysql/mysqld.log*   
 MySQL PID: */run/mysqld/mysqld.pid*   
-MySQL Socket: */var/lib/mysql/mysql.sock*
-MySQL 可视化管理地址: *http://服务器公网IP:9090*，用户名和密码请见 [账号密码](/zh/stack-accounts.md#mysql) 章节。
+MySQL Socket: */var/lib/mysql/mysql.sock*  
+MySQL 可视化管理地址: *http://服务器公网IP:9090*
 
 ### phpMyAdmin
 
 本项目中 phpMyAdmin 是采用 Docker 方式来安装的 
 
-## Docker
+### Docker
 
 Docker 根目录: */var/lib/docker*  
 Docker 镜像目录: */var/lib/docker/image*   
