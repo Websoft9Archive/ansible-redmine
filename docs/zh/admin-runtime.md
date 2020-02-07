@@ -1,6 +1,6 @@
-# CONFIG
-  
-You can configure Redmine by modify `redis.conf` file, and run the **CONFIG** command of redis-cli by SSH  
+# 配置文件
+
+Redmine 的配置可以通过修改 redis.conf 文件实现，也可以先通过 redis-cli 登录后，在运行 **CONFIG** 命令查看或设置配置项。  
 
 **CONFIG** 可以查询配置项，也可以编辑配置项：
 

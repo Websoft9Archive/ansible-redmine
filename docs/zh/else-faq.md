@@ -4,6 +4,10 @@
 
 Redmine 客户端是用于与Redmine-Server进行通信的程序，例如：redis-cli 就是典型的客户端工具
 
+#### Redmine有企业版吗？
+
+有，Redmine
+
 #### Redmine Labs 与 Redmine 有什么关系？
 
 [Redmine Labs](https://redislabs.com/) 是 Redmine 的母公司，即 Redmine 是 Redmine Labs 公司旗下的产品。

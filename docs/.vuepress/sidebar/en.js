@@ -15,10 +15,8 @@ module.exports = [
         title: 'Best Practices',
         collapsable: false,
         children: [
-          '/solution-remote',
-          '/solution-gui',
-          '/solution-cli',
-          '/solution-cluster',
+          '/solution-smtp',
+          '/solution-https',
           '/solution-backup',
           '/solution-upgrade',
           '/solution-more',
@@ -30,7 +28,8 @@ module.exports = [
         collapsable: false,
         children: [
           '/admin-services',
-          '/admin-configfile',
+          '/admin-database',
+          '/admin-runtime',
           ['https://support.websoft9.com/docs/linux/admin-practices.html','Linux'],
         ]
       },

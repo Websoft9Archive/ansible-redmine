@@ -1,44 +1,52 @@
-# Initial check
+# Initial Installation
 
 If you have completed the Redmine deployment on Cloud Platform, the following steps is for you to start use it quikly
 
 ## Preparation
 
 1. Get the **Internet IP** on your Cloud Platform
-2. Check you **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)** of Cloud Console to ensure the **TCP:6379** is allowed
+2. Check you **[Inbound of Security Group Rule](https://support.websoft9.com/docs/faq/tech-instance.html)** of Cloud Console to ensure the TCP:80 is allowed
 3. Make a domain resolution on your DNS Console if you want to use domain for Redmine
 
-## Redmine check
+## Redmine Installation Wizard
 
-1. 通过 SSH 工具连接 Redmine服务器
+1. Using local Chrome or Firefox to visit the URL *http://domain name* or *http://Internet IP*, you will enter the register interface of Redmine
+  ![Redmine reset password](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gitlab/gitlab-createpw-websoft9.png)
 
-2. 运行 Redmine Service 命令
-   ```
-   ubuntu@redis:~$ sudo systemctl status redis 
-   redis.service - redis
-   Loaded: loaded (/lib/systemd/system/redis.service; enabled; vendor preset: en
-   Active: active (running) since Mon 2020-02-03 10:03:09 UTC; 2h 27min ago
-   Process: 31972 ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf (co
-   Main PID: 31973 (redis-server)
-   ```
-3. 运行版本查询命令
-   ```
-   ubuntu@redis:~$ sudo redis-server -v
-   Redmine server v=2.8.24 sha=00000000:0 malloc=jemalloc-3.6.0 bits=64 build=ba7fac81f854c786
-   ```
-4. 运行 Redmine CLI 命令
-   ```
-   ubuntu@redis:~$ redis-cli
-   127.0.0.1:6379>
-   ```
-> More useful Redmine guide, please refer to [Redmine Documentation](https://redis.io/documentation)
+2. Log in Redmine(username is `root`) 
+   ![Redmine login](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gitlab/gitlab-login-websoft9.png)
 
-## Q&A 
+3. Go to Redmine dashboard to start use it 
+   ![Redmine dashboard](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gitlab/gitlab-backend-websoft9.png)
 
-#### 远程无法连接 Redmine？
+4. Go to Redmine Admin Area to configure it
+   ![Redmine admin area](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlab-adminpanel-websoft9.png)
 
-请检查服务器对应的安全组6379端口是否开启（入规则），且Redmine配置文件中是否允许外部访问
+5. Open: **User Settings** > **Preferences** to set your language
+   ![Redmine language](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlab-setlanguage-websoft9.png)
 
-#### 本部署是否提供Web版的可视化管理工具？
+6. Open: **User Settings** > **SSH key** to set your keys
+   ![Redmine SSH key](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlab-sshkey-websoft9.png)
 
-没有，我们暂时还没有发现稳定可靠的 Web-GUI for Redmine
+7. If you have installed Redmine-EE, go to 【Admin Area】>【License】, import your license or try it
+   ![Redmine license](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlabee-license-websoft9.png)
+
+> More useful Redmine guide, please refer to [Redmine Documentation](https://docs.gitlab.com/omnibus/README.html)
+
+## Q&A
+
+#### I can't visit the start page of Redmine?
+
+Your TCP:80 of Security Group Rules is not allowed so there no response from Chrome or Firefox
+
+#### Which database does this Redmine use?
+
+PostgreSQL
+
+#### Sometimes 502 error when running?
+
+Redmine need at leaset 4G free memory, If the memory is less than 4, there will be a 502 error.
+
+#### Redmine first installation or restart, need wait for one minute?
+
+For a single-core CPU server, the Unicorn and Sidekiq service starts up to one minute.

@@ -25,13 +25,13 @@
     - vars/main.yml
 
   roles:
-    - role: role_common
-    - role: role_cloud
-    - role: role_nginx
-    - role: role_mysql
-    - role: role_ruby
-    - role: redmine      
-    - role: role_docker
-    - role: role_docker_phpmyadmin
-    - role: role_init_password  
-    - role: role_end   
+    - {role: role_common, tags: "role_common"}
+    - {role: role_cloud, tags: "role_cloud"}
+    - {role: role_nginx, tags: "role_nginx"}
+    - {role: role_mysql, tags: "role_mysql"}
+    - {role: role_ruby, tags: "role_ruby"}
+    - {role: redmine, tags: "redmine"}      
+    - {role: role_docker, tags: "role_docker"}
+    - {role: role_docker_phpmyadmin, tags: "role_docker_phpmyadmin"}
+    - {role: role_init_password, tags: "role_init_password"}
+    - {role: role_end, tags: "role_end"}   

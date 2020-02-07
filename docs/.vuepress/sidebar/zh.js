@@ -16,10 +16,8 @@ module.exports = [
     title: '实践指南',
     collapsable: false,
     children: [
-      '/zh/solution-remote',
-      '/zh/solution-gui',
-      '/zh/solution-cli',
-      '/zh/solution-cluster',
+      '/zh/solution-smtp',
+      '/zh/solution-https',
       '/zh/solution-backup',
       '/zh/solution-upgrade',
       '/zh/solution-more',
@@ -31,7 +29,8 @@ module.exports = [
     collapsable: false,
     children: [
       '/zh/admin-services',
-      '/zh/admin-configfile',
+      '/zh/admin-database',
+      '/zh/admin-runtime',
       ['https://support.websoft9.com/docs/linux/zh/admin-practices.html','Linux'],
     ]
   },
