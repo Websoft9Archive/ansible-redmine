@@ -1,60 +1,80 @@
 # 参数
 
-本Redmine采用 [Omnibus Redmine包](https://gitlab.com/gitlab-org/omnibus-gitlab) 的安装方式。Omnibus Redmine 是官方推荐的一种安装方法，它自带了 Redmine 所需的所有组件和服务，并可以省去繁琐的配置，同时它自带 CLI 工具，便于 Redmine 升级和维护。
-
-## 架构
-
-下面是一个简化的架构图，可用于了解Redmine的架构。
-
-![](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/architecture_simplified.png)
-
-## 组件和版本
-
-Redmine 包含数十种组件([查看](https://docs.gitlab.com/ee/development/architecture.html#component-list))，通过 */opt/gitlab/version-manifest.txt* 查看服务器上所有组件名称和版本
+Redmine 预装包包含 Redmine 运行所需一序列支撑软件（简称为“组件”），下面列出主要组件名称、安装路径、配置文件地址、端口、版本等重要的信息。
 
 ## 路径
 
 ### Redmine
 
-Redmine 配置文件： */etc/gitlab/gitlab.rb*    
-Redmine 及所有组件配置： */opt/gitlab*  
-Redmine Repository 存储目录： */var/opt/gitlab/git-data*  
-Redmine 备份目录： */var/opt/gitlab/backups*
-
-### Unicorn
-
-Unicorn 日志目录： */var/log/gitlab/unicorn*  
-
-### Sidekiq
-
-Unicorn 日志目录： */var/log/gitlab/sidekiq*
+Redmine 程序路径：*/data/wwwroot/redmine*  
+Redmine 配置文件：*/data/wwwroot/redmine/config/settings.yml*  
+Redmine 数据库连接配置：*/data/wwwroot/redmine/config/database.yml*
 
 ### Nginx
 
-Nginx 日志目录: */var/log/gitlab/nginx*  
-Nginx 配置文件: */var/opt/gitlab/nginx/conf/nginx.conf*  
-Redmine 核心 Nginx 配置文件:  */var/opt/gitlab/nginx/conf/gitlab-http.conf*
+Nginx 虚拟主机配置文件：*/etc/nginx/conf.d/default.conf*  
+Nginx 主配置文件： */etc/nginx/nginx.conf*  
+Nginx 日志文件： */var/log/nginx*  
+Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
 
-### PostgreSQL
+### Ruby
 
-PostgreSQL 安装目录： */var/opt/gitlab/postgresql*  
-PostgreSQL 日志目录: */var/log/gitlab/postgresql*   
-PostgreSQL-Exporter 日志目录： */var/log/gitlab/postgres-exporter*  
-PostgreSQL 数据目录： */var/opt/gitlab/postgresql/data*
+Ruby 安装目录：*/usr/lib/ruby*  
+Ruby 虚拟机目录：*/usr/bin/ruby*  
 
-### Redis
+### MySQL
 
-Redis 安装目录： */var/opt/gitlab/redis*  
-Redis 日志目录： */var/log/gitlab/redis*
+MySQL 安装目录: *usr/local/mysql*  
+MySQL 配置文件: *etc/my.cnf*   
+MySQL 数据目录：*/data/mysql*   
+MySQL 日志文件: */var/log/mysql/mysqld.log*   
+MySQL PID: */run/mysqld/mysqld.pid*   
+MySQL Socket: */var/lib/mysql/mysql.sock*
+MySQL 可视化管理地址: *http://服务器公网IP:9090*，用户名和密码请见 [账号密码](/zh/stack-accounts.md#mysql) 章节。
 
+### phpMyAdmin
+
+本项目中 phpMyAdmin 是采用 Docker 方式来安装的 
+
+## Docker
+
+Docker 根目录: */var/lib/docker*  
+Docker 镜像目录: */var/lib/docker/image*   
+Docker daemon.json 文件：默认没有创建，请到 */etc/docker* 目录下根据需要自行创建   
 
 ## 端口号
 
-系统所用到的端口号，请通过官方文档 [Package defaults](https://docs.gitlab.com/omnibus/package-information/defaults.html) 查阅。在云服务器中，通过 **[安全组设置](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** 来控制（开启或关闭）端口是否可以被外部访问。 
+在云服务器中，通过 **[安全组设置](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** 来控制（开启或关闭）端口是否可以被外部访问。 
 
-本应用建议开启的端口如下：
+本环境建议开启的端口如下：
 
 | 名称 | 端口号 | 用途 |  必要性 |
 | --- | --- | --- | --- |
-| HTTP | 80 | 通过http访问Redmine | 必须 |
-| HTTPS | 443 | 通过https访问Redmine | 可选 |
+| HTTP | 80 | 通过 HTTP 访问 Redmine | 必须 |
+| HTTPS | 443 | 通过 HTTP 访问 Redmine | 可选 |
+| phpMyAdmin | 9090 | 通过 HTTP 访问 phpMyAdmin | 可选 |
+| MySQL | 3306 | 本地电脑远程连接服务器上的 MySQL | 可选 |
+
+## 版本号
+
+组件版本号可以通过云市场商品页面查看。但部署到您的服务器之后，组件会自动进行更新导致版本号有一定的变化，故精准的版本号请通过在服务器上运行命令查看：
+
+```shell
+# Linux Version
+lsb_release -a
+
+# Ruby
+ruby -v
+
+# Nginx version
+nginx -v
+
+# List Installed Nginx Modules
+nginx -V
+
+# MySQL version
+mysql -V
+
+# Docker Version
+docker -v
+```

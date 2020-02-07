@@ -30,7 +30,7 @@ module.exports = [
     children: [
       '/zh/admin-services',
       '/zh/admin-database',
-      '/zh/admin-runtime',
+      ['https://support.websoft9.com/docs/linux/zh/lang-ruby.html','Ruby'],
       ['https://support.websoft9.com/docs/linux/zh/admin-practices.html','Linux'],
     ]
   },

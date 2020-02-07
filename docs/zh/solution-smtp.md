@@ -15,21 +15,20 @@
    SMTP username: xxxx@xx.com
    SMTP password: #wwBJ8    //需要注意的是密码中不能包含单引号，否则出错
    ```
-2. 通过 SFTP 工具远程连接服务器，修改 Redmine 配置文件：*/etc/gitlab/gitlab.rb*
-   ```
-   gitlab_rails['smtp_enable'] = true
-   gitlab_rails['smtp_address'] = "smtp.exmail.qq.com"
-   gitlab_rails['smtp_port'] = 465
-   gitlab_rails['smtp_user_name'] = "xxxx@xx.com"
-   gitlab_rails['smtp_password'] = "password"
-   gitlab_rails['smtp_authentication'] = "login"
-   gitlab_rails['smtp_enable_starttls_auto'] = true
-   gitlab_rails['smtp_tls'] = true
-   gitlab_rails['gitlab_email_from'] = 'xxxx@xx.com'
-   ```
-4. 重启服务
-   ```
-   sudo gitlab-ctl reconfigure
-   ```
+2. 通过 SFTP 工具远程连接服务器，将 */data/wwwroot/redmine/config/configuration.yml.example* 文件复制一份，命名为 `configuration.yml`  
 
-Redmine 官方提供了数十种不同 SMTP 服务提供商的配置方法，请参考官方文档： [SMTP settings](https://docs.gitlab.com/omnibus/settings/smtp.html)
+3. 修改 `configuration.yml` 文件，找到 “production:”, 在production下面添加:  
+   ```
+    email_delivery: #(前面2个空格）
+    delivery_method: :smtp #（前面4个空格）
+    smtp_settings: #（前面4个空格）
+    address: "SMTPSERVER"	#（前面6个空格）
+    port: 587	#（前面6个空格）
+    domain: "YouDomain"	#（前面6个空格）
+    authentication: :login #（前面6个空格）
+    user_name: "YouEmail" #（前面6个空格）
+    password: "YouPassword" #（前面6个空格）
+    ```
+    > 注意缩进/空格,按照规定格式配置，否则redmine报错
+
+Redmine 官方提供了数十种不同 SMTP 配置方法，请参考官方文档： [Email Configuration](https://www.redmine.org/projects/redmine/wiki/EmailConfiguration)
