@@ -1,60 +1,78 @@
 # Parameters
 
-This Redmine pre-configure packages use the [Omnibus Redmine](https://gitlab.com/gitlab-org/omnibus-gitlab) for installation and configuration. Omnibus Redmine is a way to package different services and tools required to run Redmine, so that most users can install it without laborious configuration.
-
-## Architecture
-
-This is a simplified architecture diagram that can be used to understand Redmine’s architecture.
-
-![Redmine Architecture](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/architecture_simplified.png)
-
-## Components and Version
-
-There many componets packaged in Redmine([view lists](https://docs.gitlab.com/ee/development/architecture.html#component-list)), you can see it from the file: */opt/gitlab/version-manifest.txt* on your Server
+The Redmine deployment package contains a sequence software (referred to as "components") required for Redmine to run. The important information such as the component name, installation directory path, configuration file path, port, version, etc. are listed below.
 
 ## Path
 
 ### Redmine
 
-Redmine configuration file: */etc/gitlab/gitlab.rb*    
-Redmine and all components: */opt/gitlab*  
-Redmine Repository storage directory: */var/opt/gitlab/git-data*  
-Redmine backup directory: */var/opt/gitlab/backups*
+Redmine installation: */data/wwwroot/redmine*  
+Redmine configuration file: */data/wwwroot/redmine/config/settings.yml*  
+Redmine database configuration: */data/wwwroot/redmine/config/database.yml*
 
-### Unicorn
+### Ruby
 
-Unicorn logs direcotry: */var/log/gitlab/unicorn*  
-
-### Sidekiq
-
-Unicorn logs directory: */var/log/gitlab/sidekiq*
+Ruby install directory: */usr/lib/ruby*  
+Ruby vm directory: */usr/bin/ruby*  
 
 ### Nginx
 
-Nginx logs directory: */var/log/gitlab/nginx*  
-Nginx configuration file: */var/opt/gitlab/nginx/conf/nginx.conf*  
-Redmine core Nginx configuration file:  */var/opt/gitlab/nginx/conf/gitlab-http.conf*
+Nginx vhost configuration file: */etc/nginx/conf.d/default.conf*  
+Nginx main configuration file: */etc/nginx/nginx.conf*  
+Nginx logs directory: */var/log/nginx*  
+Nginx rewrite files directory: */etc/nginx/conf.d/rewrite*
 
-### PostgreSQL
+### MySQL
 
-PostgreSQL installation directory: */var/opt/gitlab/postgresql*  
-PostgreSQL logs directory: */var/log/gitlab/postgresql*   
-PostgreSQL-Exporter logs directory: */var/log/gitlab/postgres-exporter*  
-PostgreSQL data direcoty: */var/opt/gitlab/postgresql/data*
+MySQL install directory: */usr/share/mysql*  
+MySQL data directory: */data/mysql*  
+MySQL Configuration File: */etc/my.cnf*  
+MySQL error log: */var/log/mysql/mysqld.log*  
+MySQL Process Identification Number: */run/mysqld/mysqld.pid*  
+MySQL Socket: */var/lib/mysql/mysql.sock*  
 
-### Redis
+### phpMyAdmin
 
-Redis installation directory: */var/opt/gitlab/redis*  
-Redis logs directory: */var/log/gitlab/redis*
+we used Docker to install phpMyAdmin  
 
+### Docker
+
+Docker root directory: */var/lib/docker*  
+Docker image directory: */var/lib/docker/image*   
 
 ## Ports
 
-You can view all the used ports from the official docs [Package defaults](https://docs.gitlab.com/omnibus/package-information/defaults.html) . You can control(open or shut down) ports by **[Security Group Setting](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** of your Cloud Server whether the port can be accessed from Internet.
+You can control(open or shut down) ports by **[Security Group Setting](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** of your Cloud Server whether the port can be accessed from Internet.
 
 These ports should be opened for this application:
 
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |
-| HTTP | 80 | HTTP requests for Metabase | Required |
-| HTTPS | 443 | HTTPS requests Metabase | Optional |
+| HTTP | 80 | HTTP requests for Redmine | Required |
+| HTTPS | 443 | HTTPS requests Redmine | Optional |
+| phpMyAdmin | 9090 | HTTP to visit phpMyAdmin | Optional |
+| MySQL | 3306 | remote to connect MySQL | Optional |
+
+## Version
+
+You can see the version from product page of Marketplace. However, after being deployed to your server, the components will be automatically updated, resulting in a certain change in the version number. Therefore, the exact version number should be viewed by running the command on the server:
+
+```shell
+# Linux Version
+lsb_release -a
+
+# Ruby
+ruby -v
+
+# Nginx version
+nginx -v
+
+# List Installed Nginx Modules
+nginx -V
+
+# MySQL version
+mysql -V
+
+# Docker Version
+docker -v
+```

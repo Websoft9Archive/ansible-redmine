@@ -20,9 +20,3 @@ df -lh
 # view memory rate
 free -lh 
 ```
-
-#### Can't open PID file /var/run/redis.pid (yet?) after start: No such file or directory
-
-问题：运行命令：sudo systemctl status redis，状态是active，但是下面有段报错信息：Can't open PID file /var/run/redis.pid (yet?) after start: No such file or directory  
-原因：Redmine自身的服务PID被其他服务占用  
-方案：检查自行创建的服务是否占用了默认服务

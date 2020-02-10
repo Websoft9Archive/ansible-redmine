@@ -7,18 +7,18 @@
 * Redmine 用户名：`admin`  
 * Redmine 密  码：`存储在您的服务器指定文件中` 或 `admin`   
 
-     **密码存储路径**：*/credentials/password.txt*    
-     **获取方式**： 建议通过云控制台的命令终端，运行下图**红框**所示命令，获取 Redmine 密码   
-     ![运行cat命令](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-getpassword-websoft9.png)
+     - **密码存储路径**：*/credentials/password.txt*    
+     - **获取方式**： 建议通过云控制台的命令终端，运行下图**红框**所示命令，获取 Redmine 密码   
+        ![运行cat命令](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-getpassword-websoft9.png)
 
 ## MySQL
 
 * 管理员账号：*`root`*
-* 管理员密码：存储在您的服务器指定文件中   
+* 管理员密码：存储在您的服务器指定文件中
 
-     **密码存储路径**：*/credentials/password.txt*    
-     **获取方式**： 建议通过云控制台的命令终端，运行下图**红框**所示命令，获取数据库密码   
-     ![运行cat命令](https://libs.websoft9.com/Websoft9/DocsPicture/zh/common/catdbpassword-websoft9.png)
+     - **密码存储路径**：*/credentials/password.txt*    
+     - **获取方式**： 建议通过云控制台的命令终端，运行下图**红框**所示命令，获取数据库密码   
+       ![运行cat命令](https://libs.websoft9.com/Websoft9/DocsPicture/zh/common/catdbpassword-websoft9.png)
 
 ## Linux
 

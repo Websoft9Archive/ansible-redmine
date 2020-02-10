@@ -44,18 +44,10 @@ Manual backup for application is based on the **Exporting source code and databa
 - Skill requirement: Easy 
 - Automation: manual
 
-#### Official Docs
+The general manual backup operation steps are as follows:
 
-Redmine provide the official docs for [Backups](https://docs.gitlab.com/omnibus/settings/backups.html)
-
-#### Fast backup solution
-
-Based the official docs, we suggest you backup by these steps:
-
-1. Backup configuration files: Use SFTP  **compression** and download（*/etc/gitlab*）
-2. Backup all Redmine system: run a backup command. ([view the backup lists](https://docs.gitlab.com/ce/raketasks/backup_restore.html#creating-a-backup-of-the-gitlab-system))
-   ``` shell
-   sudo gitlab-backup create
-   ```
-3. Put the system files and configuartion files in the same folder, named according to the date
+1. Compress and download the entire */data/wwwroot/redmine* directory by SFTP 
+2. Export Redmine's database by [phpMyAdmin](/admin-mysql.md)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/phpmyadmin/phpmyadmin-export-websoft9.png)
+3. Put the source code file, data file and database file in the same folder, named according to the date
 4. Backup completed

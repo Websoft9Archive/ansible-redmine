@@ -11,27 +11,23 @@ If you have completed the Redmine deployment on Cloud Platform, the following st
 ## Redmine Installation Wizard
 
 1. Using local Chrome or Firefox to visit the URL *http://domain name* or *http://Internet IP*, you will enter the register interface of Redmine
-  ![Redmine reset password](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gitlab/gitlab-createpw-websoft9.png)
 
-2. Log in Redmine(username is `root`) 
-   ![Redmine login](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gitlab/gitlab-login-websoft9.png)
+2. Click the 【Log in】 link, enter your username and password([Don't know password?](/zh/stack-components.md#redmine))
+   ![Redmine login](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-login-websoft9.png)
 
-3. Go to Redmine dashboard to start use it 
-   ![Redmine dashboard](https://libs.websoft9.com/Websoft9/DocsPicture/zh/gitlab/gitlab-backend-websoft9.png)
+3. You can see the reminder for password modification in the Redmine console
+   ![Redmine modify password](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-resetpwf-websoft9.png)
 
-4. Go to Redmine Admin Area to configure it
-   ![Redmine admin area](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlab-adminpanel-websoft9.png)
+4. Open 【project】and create new project
+   ![Redmine new project](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-createproject-websoft9.png)
 
-5. Open: **User Settings** > **Preferences** to set your language
-   ![Redmine language](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlab-setlanguage-websoft9.png)
+5. Go to 【administrator】>【Settings】>【display】 to set the project's language
+   ![Redmine set language](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-language-websoft9.png)
 
-6. Open: **User Settings** > **SSH key** to set your keys
-   ![Redmine SSH key](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlab-sshkey-websoft9.png)
+6. Go to 【administrator】>【Settings】>【user】 to set the user's language interface(is different from Project's language)
+   ![Redmine SSH key](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-userlanguage-websoft9.png)
 
-7. If you have installed Redmine-EE, go to 【Admin Area】>【License】, import your license or try it
-   ![Redmine license](https://libs.websoft9.com/Websoft9/DocsPicture/en/gitlab/gitlabee-license-websoft9.png)
-
-> More useful Redmine guide, please refer to [Redmine Documentation](https://docs.gitlab.com/omnibus/README.html)
+> More useful Redmine guide, please refer to [Redmine guide](https://www.redmine.org/projects/redmine/wiki/Guide)
 
 ## Q&A
 
@@ -41,12 +37,8 @@ Your TCP:80 of Security Group Rules is not allowed so there no response from Chr
 
 #### Which database does this Redmine use?
 
-PostgreSQL
+MySQL
 
 #### Sometimes 502 error when running?
 
-Redmine need at leaset 4G free memory, If the memory is less than 4, there will be a 502 error.
-
-#### Redmine first installation or restart, need wait for one minute?
-
-For a single-core CPU server, the Unicorn and Sidekiq service starts up to one minute.
+Redmine need at leaset 2G free memory, If the memory is less than 2, there will be a 502 error.

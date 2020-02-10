@@ -10,17 +10,54 @@ Nonetheless, from the perspective of server security and subsequent maintenance 
 
 Redmine domain name binding steps:
 
-1. Connect your Cloud Server
-2. Modify [Redmine configuration file](/zh/stack-components.md#gitlab): */etc/gitlab/gitlab.rb*, change the **external_url**'s value *http://gitlab.example.com** to your domain name
-   ```text
-   external_url "http://gitlab.example.com" # 改为自定义域名
-   ...
+1. Use WinSCP to edit the file: */data/wwwroot/redmine/config/configuration.yml* 
+2. Modify the domain name related items and save it 
+3. Restart services
    ```
-3. Save it and restart Service
-   ```
-   sudo gitlab-ctl reconfigure
+   sudo systemctl restart nginx
+   sudo systemctl restart redmine
    ```
 
-## Other
+## Plugin
 
-Coming soon
+You can use the Redmine's [plugins](https://www.redmine.org/plugins) to extend functions:
+
+### Install plugin
+
+1. Use the SFTP to connect server  
+2. Download the plugin to the directory: */data/wwwroot/redmine/plugins*  
+3. cd to the directory */data/wwwroot/redmine* and excuse the following command
+   ```
+   bundle exec rake redmine:plugins:migrate RAILS_ENV=production
+   ```
+4. Restart services
+   ```
+   sudo systemctl restart nginx
+   sudo systemctl restart redmine
+   ```
+5. Login to Redmine to check your plugin
+
+
+### Uninstall plugin
+
+1. Use the SFTP to connect server   
+3. cd to the directory */data/wwwroot/redmine* and excuse the following command
+   ```
+   bundle exec rake redmine:plugins:migrate NAME=plugin_name VERSION=0 RAILS_ENV=production   #  plugin_name 为插件名称
+   ```
+3. Use SFTP to delete your plugin in the directory: */data/wwwroot/redmine/plugins*
+
+4. Restart services
+   ```
+   sudo systemctl restart nginx
+   sudo systemctl restart redmine
+   ```
+
+## Change database connection 
+
+When you changed database engin(e.g. MySQL to PostreSQL) or modify the database's password, your Redmine may be out of service.
+How to fix it? You need to modify the **database connection items** in the Redmine's database configuration file*/data/wwwroot/redmine/config/database.yml*
+
+## LDAP
+
+Please read the official docs: https://www.redmine.org/projects/redmine/wiki/RedmineLDAP

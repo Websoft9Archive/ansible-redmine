@@ -15,21 +15,18 @@ Follow is the sample using **SendGrid's SMTP Service** to configure sending mail
    SMTP username: websoft9smpt
    SMTP password: #fdfwwBJ8f    
    ```
-2. Use SSH or SFTP to connect Server, modify the Redmine configuration file: */etc/gitlab/gitlab.rb*
-   ```
-   gitlab_rails['smtp_enable'] = true
-   gitlab_rails['smtp_address'] = "smtp.sendgrid.net"
-   gitlab_rails['smtp_port'] = 587
-   gitlab_rails['smtp_user_name'] = "a_sendgrid_crendential"
-   gitlab_rails['smtp_password'] = "a_sendgrid_password"
-   gitlab_rails['smtp_domain'] = "smtp.sendgrid.net"
-   gitlab_rails['smtp_authentication'] = "login"
-   gitlab_rails['smtp_enable_starttls_auto'] = true
-   gitlab_rails['smtp_tls'] = false
-   ```
-4. Restart Service
-   ```
-   sudo gitlab-ctl reconfigure
-   ```
+2. Use SSH or SFTP to connect Server, copy */data/wwwroot/redmine/config/configuration.yml.example* and rename it to `configuration.yml`  
 
-Redmine provides configuration methods for dozens of different SMTP service providers, please refer to the official documentation:[SMTP settings](https://docs.gitlab.com/omnibus/settings/smtp.html)
+3. Modify `configuration.yml` and add the following **SMTP segment** to the **production** part: 
+   ```
+    email_delivery: 
+    delivery_method: :smtp
+    smtp_settings: 
+    address: "SMTPSERVER"
+    port: 587
+    domain: "YouDomain"
+    authentication: :login 
+    user_name: "YouEmail" 
+    password: "YouPassword"
+    ```
+Redmine provides  official documentation for SMTP: [Email Configuration](https://www.redmine.org/projects/redmine/wiki/EmailConfiguration)
