@@ -21,7 +21,7 @@ sudo certbot
 如果你已经申请了商业证书（免费版或收费版均可），参考如下HTTPS配置说明：
 
 1. 将申请的证书、 证书链文件和秘钥文件上传到 */data/cert* 目录
-2. 打开虚拟主机配置文件：*/etc/nginx/conf.d/default.conf* ，插入**HTTPS 配置段** 到 Nextcloud 的 *server{ }* 中
+2. 打开虚拟主机配置文件：*/etc/nginx/conf.d/default.conf*，插入**HTTPS 配置段** 到 Redmine 的 *server{ }* 中
  ``` text
    #-----HTTPS template start------------
    listen 443 ssl; 
@@ -33,8 +33,11 @@ sudo certbot
    ssl_prefer_server_ciphers on;
    #-----HTTPS template end------------
    ```
-3. 修改 ssl_certificate, ssl_certificate_key 的值
-4. 保存，[重启 Nginx 服务](/zh/admin-services.html#nginx)
+3. 修改 ssl_certificate, ssl_certificate_key 的值，保存
+4. 重启 [Nginx 服务](/zh/admin-services.html#nginx) 后生效
+   ```
+   sudo systemctl restart nginx
+   ```
 
 ## 延伸阅读
 

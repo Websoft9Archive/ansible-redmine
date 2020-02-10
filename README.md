@@ -10,16 +10,18 @@
 
 | 条件       | 详情       | 备注  |
 | ------------ | ------------ | ----- |
-| 操作系统       | Ubuntu18.04       |    |
-| 公有云| AWS, Azure, 阿里云, 华为云, 腾讯云 |  |
-| 私有云|  KVM, VMware, VirtualBox, OpenStack |  |
+| 操作系统       | Ubuntu18.04       |  必选  |
+| 公有云| AWS, Azure, 阿里云, 华为云, 腾讯云 | 可选 |
+| 私有云|  KVM, VMware, VirtualBox, OpenStack | 可选 |
 | 服务器配置 | 最低1核2G，安装时所需的带宽不低于10M |  建议采用按量100M带宽 |
+
+更多技术要求参考官方文档：[《Requirements》](https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Requirements)
 
 ## 组件
 
 包含的核心组件为：Redmine,Ruby,Nginx,MySQL等
 
-更多请见[参数表](/docs/zh/stack-components.md)
+更多请见：[参数表](/docs/zh/stack-components.md)
 
 ## 本项目安装的是 Redmine 最新版吗？
 

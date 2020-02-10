@@ -23,6 +23,8 @@ Redmine 域名绑定操作步骤（[官方文档](https://docs.gitlab.com/omnibu
 
 ## 插件
 
+通过 Redmine 提供的[插件](https://www.redmine.org/plugins)可以扩展它的功能：
+
 ### 安装插件
 
 1. 使用 SFTP 工具连接服务器  
@@ -34,6 +36,7 @@ Redmine 域名绑定操作步骤（[官方文档](https://docs.gitlab.com/omnibu
 4. 重启服务
    ```
    sudo systemctl restart nginx
+   sudo systemctl restart redmine
    ```
 5. 登陆 Redmine 查看插件是否安装好
 
@@ -48,3 +51,16 @@ Redmine 域名绑定操作步骤（[官方文档](https://docs.gitlab.com/omnibu
 3. 使用 SFTP 删除 /data/wwwroot/redmine/plugins 对应的插件
 
 4. 重启服务
+   ```
+   sudo systemctl restart nginx
+   sudo s
+   ```
+
+## 更改数据库
+
+如果更换了数据库（例如：从MySQL更换到PostgreSQL）或修改了数据库密码，需要修改 Redmine 数据库连接配置：*/data/wwwroot/redmine/config/database.yml*
+
+## LDAP
+
+参考官方文档：https://www.redmine.org/projects/redmine/wiki/RedmineLDAP
+

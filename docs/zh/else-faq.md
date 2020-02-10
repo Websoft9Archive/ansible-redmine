@@ -1,32 +1,32 @@
 # FAQ
 
-#### 什么是Redmine客户端？
+#### Redmine 支持多语言？
 
-Redmine 客户端是用于与Redmine-Server进行通信的程序，例如：redis-cli 就是典型的客户端工具
+支持英文、中文等多种语言
+
+#### Redmine 支持哪些SCM？
+
+SVN, CVS, Git, Mercurial and Bazaar
 
 #### Redmine有企业版吗？
 
-有，Redmine
+官方没有提供企业版
 
-#### Redmine Labs 与 Redmine 有什么关系？
+#### Redmine 支持哪些数据库？
 
-[Redmine Labs](https://redislabs.com/) 是 Redmine 的母公司，即 Redmine 是 Redmine Labs 公司旗下的产品。
-
-#### Redmine需要密码才能登录吗？
-
-可以无需设置密码验证
-
-#### Redmine 支持哪些数据结构？
-
-Redmine不是简单的键值存储，它实际上是一个数据结构服务器，支持不同类型的值。包括：二进制字符串、列表、集合、哈希、位图、HyperLogLogs、流等
+支持 MySQL, PostgreSQL, SQlite, SQL Server 等多种数据库，本部署方案采用 MySQL 作为数据库。
 
 #### 是否有可视化的数据库管理工具？
 
-部分Redmine镜像已经安装 RedmineInsight 这个可视化管理工具，如果没有安装，您可以自行安装。
+已经安装 PHPMyAdmin 作为数据库管理工具
+
+#### 如何禁止 phpMyAdmin 访问？
+
+在云控制台安全组中，检查 **Inbound（入）规则** 下的 **TCP:9090** 端口是否开启，开启代表可以方案，没有开启即不可以方案
 
 #### 是否可以修改Redmine的源码路径？
 
-不可以修改
+不建议修改
 
 #### 部署和安装有什么区别？
 

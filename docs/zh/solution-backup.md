@@ -50,18 +50,10 @@ sidebarDepth: 3
 - 技能要求：非常容易
 - 自动化：无
 
-#### 官方文档
+通用的手动备份操作步骤如下：
 
-Redmine 官方提供了详细的备份文档：[Backups](https://docs.gitlab.com/omnibus/settings/backups.html)
-
-#### 快速备份方案
-
-基于官方文档，我们建议的备份操作步骤如下：
-
-1. 备份配置文件：通过 SFTP 工具将所有配置（*/etc/gitlab*）**压缩后**再完整的下载到本地
-2. 备份整个 Redmine 系统：运行一条备份命令即可（[查看备份清单](https://docs.gitlab.com/ce/raketasks/backup_restore.html#creating-a-backup-of-the-gitlab-system)）
-   ``` shell
-   sudo gitlab-backup create
-   ```
-3. 将程序文件和数据库文件放到同一个文件夹，根据日期命名
+1. 通过 WinSCP 将网站目录（*/data/wwwroot/redmine*）**压缩后**再完整的下载到本地
+2. 通过 [phpMyAdmin](/zh/admin-database.md) 导出 Redmine 数据库
+  ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-export-websoft9.png)
+3. 将程序文件、数据文件和数据库文件放到同一个文件夹，根据日期命名
 4. 备份工作完成
