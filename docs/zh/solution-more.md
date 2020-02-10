@@ -4,22 +4,18 @@
 
 ## 域名绑定
 
-绑定域名的前置条件是：Redmine已经可以通过解析后的域名访问。  
+绑定域名的前置条件是：Redmine已经可以通过解析后的域名访问。虽然如此，从服务器安全和后续维护考量，**域名绑定**步骤不可省却  
 
-虽然如此，从服务器安全和后续维护考量，**域名绑定**步骤不可省却  
+Redmine 具体绑定域名操作：
 
-Redmine 域名绑定操作步骤（[官方文档](https://docs.gitlab.com/omnibus/settings/configuration.html#configuring-the-external-url-for-gitlab)）：
-
-1. 通过 SSH 或 SFTP 登录云服务器
-2. 修改 [Redmine 配置文件](/zh/stack-components.md#gitlab)：*/etc/gitlab/gitlab.rb*，将其中的 **external_url** 项的值 *http://gitlab.example.com* 修改为你的域名
-   ```text
-   external_url "http://gitlab.example.com" # 改为自定义域名
-   ...
-   ``` 
-3. 保存配置文件，重启下面的服务
+1. 使用 WinSCP 打开文件：/data/wwwroot/redmine/config/configuration.yml
+2. 修改配置文件中与域名相关的值，然后保存
+3. 重启服务后生效
    ```
-   sudo gitlab-ctl reconfigure
+   sudo systemctl restart nginx
+   sudo systemctl restart redmine
    ```
+
 
 ## 插件
 

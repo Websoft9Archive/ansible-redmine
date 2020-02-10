@@ -57,3 +57,5 @@ sidebarDepth: 3
   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-export-websoft9.png)
 3. 将程序文件、数据文件和数据库文件放到同一个文件夹，根据日期命名
 4. 备份工作完成
+
+更多备份相关方案，参考官方文档：[《RedmineBackupRestore》](https://redmine.org/projects/redmine/wiki/RedmineBackupRestore)
