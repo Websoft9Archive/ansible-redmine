@@ -49,12 +49,14 @@ Redmine 具体绑定域名操作：
 4. 重启服务
    ```
    sudo systemctl restart nginx
-   sudo s
+   sudo systemctl restart redmine
    ```
 
 ## 更改数据库
 
-如果更换了数据库（例如：从MySQL更换到PostgreSQL）或修改了数据库密码，需要修改 Redmine 数据库连接配置：*/data/wwwroot/redmine/config/database.yml*
+在使用 Redmine 的过程中，如果更换了数据库（例如：从MySQL更换到PostgreSQL）或修改了数据库密码，会导致系统无法访问，只需：  
+
+修改 Redmine 数据库连接配置：*/data/wwwroot/redmine/config/database.yml* 中相关的连接参数
 
 ## LDAP
 
