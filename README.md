@@ -60,5 +60,4 @@ wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/i
 
 ## To do
 
-* 支持 Centos，Amazon Linux
-* 默认预装redmine重要插件
+* 默认预装redmine重要组件
