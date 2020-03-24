@@ -1,28 +1,31 @@
 mysql_version: "5.7"  
-mysql_root_password: 123456  
+mysql_root_password: "123456"  
 # 新建数据库
 mysql_databases: 
   - name: redmine
+
+docker_applications: 
+  - phpmyadmin
 
 # 新建数据库用户
 mysql_users: 
   - name: redmine
     host: localhost
-    password: 123456
+    password: "123456"
     priv: 'redmine.*:ALL'
 
 init_db: 
   mysql:
     user: root
-    password: 123456
+    password: "123456"
 
 init_application:
   redmine:
     service: redmine
     database: redmine
     database_user: redmine
-    database_host: 127.0.0.1
-    database_password: 123456
+    database_host: "127.0.0.1"
+    database_password: "123456"
     random_password: True #True or False
     default_account: admin
     default_password: admin
