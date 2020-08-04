@@ -78,13 +78,3 @@
     state: directory
     recurse: yes
 
-## 设置nginx端口转发
-- name: copy nginx configuration file
-  copy:
-    src: default.conf
-    dest: /etc/nginx/conf.d/default.conf
-    mode: 0755
-
-- name: restart nginx
-  service: name=nginx  state=restarted
-
