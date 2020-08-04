@@ -77,4 +77,3 @@
     group: redmine
     state: directory
     recurse: yes
-
