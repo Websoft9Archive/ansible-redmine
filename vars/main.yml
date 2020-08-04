@@ -1,13 +1,19 @@
+# Global
+region: "0"
+
+common_os_support: ["CentOS", "Ubuntu", "Amazon"]
+
+nginx_reverse_proxy_port: "9292"
+
 mysql_version: "5.7"  
 mysql_root_password: "123456"  
-# 新建数据库
-mysql_databases: 
-  - name: redmine
 
 docker_applications: 
   - phpmyadmin
 
-# 新建数据库用户
+mysql_databases: 
+  - name: redmine
+
 mysql_users: 
   - name: redmine
     host: localhost
@@ -16,23 +22,18 @@ mysql_users:
 
 init_db: 
   mysql:
-    user: root
+    admin: root
+    user: ["redmine"]
     password: "123456"
 
 init_application:
   redmine:
-    service: redmine
-    database: redmine
-    database_user: redmine
-    database_host: "127.0.0.1"
-    database_password: "123456"
-    random_password: True #True or False
-    default_account: admin
-    default_password: admin
-    random_password_method: 
-        - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
-        - mysql -uredmine -p$new_password -e "use redmine;update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"
-        - systemctl restart redmine
-    config_path:
-        - /data/wwwroot/redmine/config/database.yml
-
+    username: admin
+    password: "admin"
+    service_before:
+    service_after: "redmine.service"
+    config_paths: 
+      - /data/wwwroot/redmine/config/database.yml
+    commands: 
+      - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
+      - mysql -uredmine -p$new_password -e "use redmine;update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"

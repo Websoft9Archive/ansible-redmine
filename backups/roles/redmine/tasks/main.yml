@@ -10,6 +10,7 @@
     home: /data/wwwroot/redmine
     create_home: no
 
+
 - name: download redmine 
   unarchive:
     src: '{{redmine_download_url}}'

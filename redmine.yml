@@ -1,5 +1,4 @@
 ---
-# 安装redmine
 - name: Redmine
   hosts: all
   become: yes
