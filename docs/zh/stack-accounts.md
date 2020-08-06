@@ -1,24 +1,20 @@
 # 账号密码
 
-使用Redmine，可能会用到的几组账号密码如下：
+通过**SSH**连接云服务器，运行 `sudo cat /credentials/password.txt` 命令，查看所有相关账号和密码
+
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-getpassword-websoft9.png)
+
+下面列出可能需要用到的几组账号密码：：
 
 ## Redmine
 
 * Redmine 用户名：`admin`  
-* Redmine 密  码：`存储在您的服务器指定文件中` 或 `admin`   
-
-     - **密码存储路径**：*/credentials/password.txt*    
-     - **获取方式**： 建议通过云控制台的命令终端，运行下图**红框**所示命令，获取 Redmine 密码   
-        ![运行cat命令](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-getpassword-websoft9.png)
+* Redmine 密  码：存储在您的服务器中的文件中 */credentials/password.txt*  
 
 ## MySQL
 
 * 管理员账号：*`root`*
-* 管理员密码：存储在您的服务器指定文件中
-
-     - **密码存储路径**：*/credentials/password.txt*    
-     - **获取方式**： 建议通过云控制台的命令终端，运行下图**红框**所示命令，获取数据库密码   
-       ![运行cat命令](https://libs.websoft9.com/Websoft9/DocsPicture/zh/common/catdbpassword-websoft9.png)
+* 管理员密码：存储在您的服务器中的文件中 */credentials/password.txt*  
 
 ## Linux
 

@@ -44,7 +44,7 @@ Docker image directory: */var/lib/docker/image*
 
 You can control(open or shut down) ports by **[Security Group Setting](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** of your Cloud Server whether the port can be accessed from Internet.
 
-These ports should be opened for this application:
+You can run the cmd `netstat -tunlp` to list all used ports, and we list the following most useful ports:
 
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |
@@ -58,6 +58,9 @@ These ports should be opened for this application:
 You can see the version from product page of Marketplace. However, after being deployed to your server, the components will be automatically updated, resulting in a certain change in the version number. Therefore, the exact version number should be viewed by running the command on the server:
 
 ```shell
+# Check all components version
+sudo cat /data/logs/install_version.txt
+
 # Linux Version
 lsb_release -a
 

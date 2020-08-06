@@ -1,20 +1,22 @@
 # SSL/HTTPS
 
+# SSL/HTTPS
+
 Redmine deployment package has installed the SSL module of Nginx and open Certificate Authority **[Let's Encrypt](https://letsencrypt.org/)** for you configure the HTTPS quickly and conveniently.
 
 > In addition to the vhost configuration file, HTTPS settings do not need to modify any files in Nginx
 
-We provided your two solution for **SSL/HTTPS** 
+## Quick start
 
-## Interaction configuration
+### Automatic deployment
 
-If you want to use a free certificate, just run the one command `certbot` on your instance to start the HTTPS deployment.
+If you want to use a free certificate, just run the one command `sudo certbot` on your instance to start the HTTPS deployment.
 
 ```
 sudo certbot
 ```
 
-## Manual configuration
+### Manual deployment
 
 If you have applied for a commercial certificate, complete the HTTPS configuration in just three steps:
 
