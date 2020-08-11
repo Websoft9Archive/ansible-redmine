@@ -2,6 +2,7 @@
 - name: Install requirements
   apt:
     name: [libxml2-dev,libmysqlclient-dev,libssl-dev]
+  when: ansible_os_family == "Debian"
 
 - name: Add redmine User
   user:
