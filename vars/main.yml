@@ -23,7 +23,7 @@ mysql_users:
 init_db: 
   mysql:
     admin: root
-    user: ["redmine"]
+    users: ["redmine"]
     password: "123456"
     config_paths: 
       - /data/wwwroot/redmine/config/database.yml
