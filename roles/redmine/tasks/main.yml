@@ -73,6 +73,14 @@
     src: redmine.service
     dest: /lib/systemd/system/redmine.service
 
+# rvm rvmrc warning ignore allGemfiles 用于消除警告信息
+- name: Link  Redmine service 
+  shell: |
+    ln -sf /usr/local/rvm/gems/ruby-2.4.9/bin/puma /usr/local/bin/
+    ln -sf /usr/local/rvm/gems/ruby-2.4.9/bin/ruby_executable_hooks /usr/bin/
+    rvm rvmrc warning ignore allGemfiles
+  when: ansible_os_family == "RedHat"
+  
 - name: start redmine
   service: name=redmine state=started enabled=yes
 
