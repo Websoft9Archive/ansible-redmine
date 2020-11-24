@@ -1,8 +1,7 @@
 ---
-- name: Install requirements
-  apt:
-    name: [libxml2-dev,libmysqlclient-dev,libssl-dev]
-  when: ansible_os_family == "Debian"
+# install rethinkdb by OS_family
+- name: Install this role on {{ansible_os_family}}
+  include: "{{ansible_os_family}}.yml"
 
 - name: Add redmine User
   user:
@@ -29,10 +28,6 @@
 
 - name: Additional dependencies
   copy: src=Gemfile.local dest=/data/wwwroot/redmine/
-
-- name: Install dependencies by RedHat
-  shell: yum install mysql-devel -y
-  when: ansible_os_family == "RedHat"
     
 - name: bundler install required
   bundler:
