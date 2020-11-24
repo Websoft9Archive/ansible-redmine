@@ -1,1 +1,3 @@
-
+- name: Install requirements
+  apt:
+    name: [libxml2-dev,libmysqlclient-dev,libssl-dev]
