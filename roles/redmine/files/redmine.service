@@ -1,11 +1,12 @@
 [Unit]
 Description=Redmine
-After=nginx.service
+After=nginx mysql 
+
 [Service]
 Environment=RAILS_ENV=production
 Type=simple
 WorkingDirectory=/data/wwwroot/redmine
-ExecStart=/usr/local/bin/puma -b tcp://127.0.0.1:9292 -e production 
+ExecStart=/bin/bash -c 'source /etc/profile.d/rvm.sh;puma -b tcp://127.0.0.1:9292 -e production' 
 User=redmine
 [Install]
 WantedBy=multi-user.target
