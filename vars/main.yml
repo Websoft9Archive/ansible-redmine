@@ -3,6 +3,8 @@ region: "0"
 
 common_os_support: ["CentOS", "Ubuntu", "Amazon"]
 
+ruby_version: "2.4"
+
 nginx_reverse_proxy_port: "9292"
 nginx_certbot: True
 nginx_appname: "redmine"
