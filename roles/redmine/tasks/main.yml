@@ -1,5 +1,4 @@
 ---
-# install rethinkdb by OS_family
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
 
@@ -10,7 +9,7 @@
     home: /data/wwwroot/redmine
     create_home: no
 
-- name: download redmine 
+- name: Download redmine 
   unarchive:
     src: '{{redmine_download_url}}'
     dest: /data/wwwroot
@@ -19,9 +18,16 @@
     owner: redmine
     group: redmine
 
-- shell: mv /data/wwwroot/redmine-*  /data/wwwroot/redmine
+- name: Get redmine version 
+  shell: ls /data/wwwroot/ |grep redmine |cut -d- -f 2
+  register: redmine_version
 
-- name: set databases config
+- name: Rename redmine dir and Clear warning
+  shell: |
+    cd /data/wwwroot; mv redmine-* redmine
+    /usr/local/rvm/bin/rvm rvmrc warning ignore allGemfiles
+ 
+- name: Set databases config
   copy: 
     src: database.yml
     dest: /data/wwwroot/redmine/config
@@ -29,7 +35,7 @@
 - name: Additional dependencies
   copy: src=Gemfile.local dest=/data/wwwroot/redmine/
     
-- name: bundler install required
+- name: Bundler install required
   bundler:
     state: present
     chdir: /data/wwwroot/redmine
@@ -50,7 +56,7 @@
   args:
     chdir: /data/wwwroot/redmine
 
-- name: make directory
+- name: create directory for redmine
   file:
     path: /data/wwwroot/redmine/{{item}}
     owner: redmine 
@@ -63,20 +69,12 @@
     - tmp/pids
     - public/plugin_assets
 
-- name: set redmine service
+- name: Set redmine service
   copy:
     src: redmine.service
     dest: /lib/systemd/system/redmine.service
-
-# rvm rvmrc warning ignore allGemfiles 用于消除警告信息
-- name: Link  Redmine service 
-  shell: |
-    ln -sf /usr/local/rvm/gems/ruby-2.4.9/bin/puma /usr/local/bin/
-    ln -sf /usr/local/rvm/gems/ruby-2.4.9/bin/ruby_executable_hooks /usr/bin/
-    rvm rvmrc warning ignore allGemfiles
-  when: ansible_os_family == "RedHat"
   
-- name: start redmine
+- name: Start and enable redmine
   service: name=redmine state=started enabled=yes
 
 - name:  File system permissions
@@ -86,3 +84,14 @@
     group: redmine
     state: directory
     recurse: yes
+
+# Check version
+- block:
+  - name: Check redmine Version
+    shell: sudo echo "redmine version:" "{{redmine_version.stdout}}" | sudo tee -a /data/logs/install_version.txt
+
+# check service state
+  - name: Check redmine Service
+    shell: systemctl status redmine | grep Active*
+    register: check_redmine_service
+    notify: check_redmine_service
