@@ -25,9 +25,9 @@
   roles:
     - {role: role_common, tags: "role_common"}
     - {role: role_cloud, tags: "role_cloud"}
-    - {role: role_ruby, tags: "role_ruby"}
     - {role: role_nginx, tags: "role_nginx"}
     - {role: role_mysql, tags: "role_mysql"}
+    - {role: role_ruby, tags: "role_ruby"}
     - {role: redmine, tags: "redmine"}      
     - {role: role_docker, tags: "role_docker"}
     - {role: role_init, tags: "role_init"}
