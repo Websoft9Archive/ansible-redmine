@@ -1,6 +1,6 @@
 [Unit]
 Description=Redmine
-After=nginx mysql 
+After=nginx.service mysql.service 
 
 [Service]
 Environment=RAILS_ENV=production
