@@ -35,8 +35,8 @@ init_application:
   redmine:
     username: admin
     password: "admin"
-    service_before:
     service_after: "redmine.service"
     commands: 
       - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
       - mysql -uroot -p$new_password -e "use redmine;update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"
+      - sudo sleep 15 && sudo systemctl restart redmine
