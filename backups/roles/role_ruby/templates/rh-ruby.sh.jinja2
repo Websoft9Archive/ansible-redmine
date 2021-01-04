@@ -1,7 +1,0 @@
-#!/bin/bash
-
-source /opt/rh/rh-ruby{{rubyver.stdout}}/enable
-
-export X_SCLS="`scl enable rh-ruby{{rubyver.stdout}} 'echo $X_SCLS'`"
-
-export PATH=$PATH:/opt/rh/rh-ruby{{rubyver.stdout}}/root/usr/local/bin

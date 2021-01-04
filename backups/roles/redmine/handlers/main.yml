@@ -1,3 +1,0 @@
----
-- name: start redmine
-  service: name=redmine state=started enabled=yes
