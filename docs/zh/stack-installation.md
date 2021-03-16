@@ -12,7 +12,7 @@
 
 1. 使用本地 Chrome 或 Firefox 浏览器访问网址：*http://域名* 或 *http://服务器公网IP*, 进入Redmine主页。
 
-2. 点击【登录】，进入系统 [不知道账号密码？]（/zh/stack-accounts.md）
+2. 点击【登录】，进入系统 [不知道账号密码？](/zh/stack-accounts.md)
    ![Redmine 密码](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-login-websoft9.png)
 
 3. 进入 Redmine 控制台，系统提示修改密码 
