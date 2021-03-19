@@ -1,5 +1,5 @@
 common_install_docker: True
-tools_applications: [phpmyadmin]
+docker_applications: [phpmyadmin]
 
 nginx_appname: "redmine"
 nginx_vhost_mode: "reverse"
