@@ -1,5 +1,9 @@
 common_install_docker: True
 
+nginx_appname: "redmine"
+nginx_vhost_mode: "reverse"
+nginx_reverse_proxy_port: "9007"
+nginx_certbot: True
 
 init_docker:
   redmine:

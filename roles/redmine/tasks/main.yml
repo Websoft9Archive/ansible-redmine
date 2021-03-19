@@ -8,7 +8,7 @@
     src: '{{item.src}}'
     dest: '{{item.dest}}'
   with_items:
-    - {src: docker-compose.yml,dest:/data/wwwroot/redmine/docker-compose.yml}
+    - {src: docker-compose.yml,dest: /data/wwwroot/redmine/docker-compose.yml}
 
 - name: Run docker-compose 
   shell: | 
