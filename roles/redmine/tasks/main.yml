@@ -7,7 +7,7 @@
     - /data/redmine
 
 - name: Copy init password file 
-  file: 
+  copy: 
     src: init_password.sh
     dest: /data/wwwroot/redmine/init_password.sh
     
