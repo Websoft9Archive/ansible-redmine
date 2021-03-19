@@ -19,4 +19,4 @@ init_docker:
     compose_commands:
       - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/docker-compose.yml
     commands: 
-      - sudo docker exec -it mysql_redmine bash -c 'bash /tmp/init_password.sh'
+      - sudo docker exec -it mysql-redmine bash -c 'bash /tmp/init_password.sh'
