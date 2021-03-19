@@ -8,21 +8,24 @@ services:
     ports:
       - 9007:3000
     volumes: 
-      /data/redmine:/usr/src/redmine/files
+      - /data/redmine:/usr/src/redmine/files
     environment:
       REDMINE_DB_MYSQL: db
+      REDMINE_DB_USERNAME: redmine
       REDMINE_DB_PASSWORD: 123456
       REDMINE_SECRET_KEY_BASE: supersecretkey
 
   db:
     image: mysql:5.7
-    container_name: "mysql"
+    container_name: "mysql-redmine"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: redmine
+    volumes:
+      - /data/wwwroot/redmine/init_password.sh:/tmp/init_password.sh
 
 networks:
   default:
     external:
-      name: "apps"
+      name: "{{common_docker_addnetwork}}"

@@ -1,8 +1,16 @@
 - name: Create a redmine dir
   file: 
     state: directory
-    path: /data/wwwroot/redmine
+    path: "{{item}}"
+  loop: 
+    - /data/wwwroot/redmine
+    - /data/redmine
 
+- name: Copy init password file 
+  file: 
+    src: init_password.sh
+    dest: /data/wwwroot/redmine/init_password.sh
+    
 - name: Copy docker-compose file
   template: 
     src: '{{item.src}}'
@@ -26,3 +34,7 @@
 - name: Check redmine version
   shell: >
     sudo echo "redmine version:" $(docker inspect redmine:latest |grep REDMINE_VERSION |head -1 |cut -d= -f2) |sudo tee -a /data/logs/install_version.txt  
+
+- name: Check mysql version
+  shell: >
+    sudo echo "mysql version:" $(docker images |grep mysql |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  

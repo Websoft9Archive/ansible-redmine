@@ -7,11 +7,14 @@ nginx_certbot: True
 
 init_docker:
   redmine:
+    db: mysql
     db_username: redmine
     db_password: "123456" 
     admin_username: admin
-    admin_password: "123456"
+    admin_password: "admin"
     service_after: "docker.service"
     compose_path: "/data/wwwroot/redmine/docker-compose.yml"
     compose_commands:
       - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/docker-compose.yml
+    commnds: 
+      - sudo docker exec -it mysql_redmine bash -c 'bash /tmp/init_password.sh'
