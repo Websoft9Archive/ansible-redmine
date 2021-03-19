@@ -11,7 +11,6 @@ services:
       - /data/redmine:/usr/src/redmine/files
     environment:
       REDMINE_DB_MYSQL: db
-      REDMINE_DB_USERNAME: redmine
       REDMINE_DB_PASSWORD: 123456
       REDMINE_SECRET_KEY_BASE: supersecretkey
 
