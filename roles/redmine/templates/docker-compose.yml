@@ -19,11 +19,11 @@ services:
     image: mysql:5.7
     container_name: "mysql-redmine"
     restart: always
+    volumes:
+      - /data/wwwroot/redmine/init_password.sh:/tmp/init_password.sh    
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: redmine
-    volumes:
-      - /data/wwwroot/redmine/init_password.sh:/tmp/init_password.sh
 
 networks:
   default:
