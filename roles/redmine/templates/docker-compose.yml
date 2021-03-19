@@ -25,4 +25,4 @@ services:
 networks:
   default:
     external:
-      name: "{{tools_addnetwork}}"
+      name: "apps"
