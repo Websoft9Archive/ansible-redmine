@@ -1,97 +1,28 @@
----
-- name: Install this role on {{ansible_os_family}}
-  include: "{{ansible_os_family}}.yml"
-
-- name: Add redmine User
-  user:
-    name: redmine
-    shell: /usr/sbin/nologin
-    home: /data/wwwroot/redmine
-    create_home: no
-
-- name: Download redmine 
-  unarchive:
-    src: '{{redmine_download_url}}'
-    dest: /data/wwwroot
-    remote_src: yes
-    validate_certs: no
-    owner: redmine
-    group: redmine
-
-- name: Get redmine version 
-  shell: ls /data/wwwroot/ |grep redmine |cut -d- -f 2
-  register: redmine_version
-
-- name: Rename redmine dir and Clear warning
-  shell: |
-    cd /data/wwwroot; mv redmine-* redmine
-    /usr/local/rvm/bin/rvm rvmrc warning ignore allGemfiles
- 
-- name: Set databases config
-  copy: 
-    src: database.yml
-    dest: /data/wwwroot/redmine/config
-
-- name: Additional dependencies
-  copy: src=Gemfile.local dest=/data/wwwroot/redmine/
-    
-- name: Bundler install required
-  bundler:
-    state: present
-    chdir: /data/wwwroot/redmine
-    extra_args: --without development test rmagick
-
-- name: Session store secret generation
-  command: bundle exec rake generate_secret_token
-  args:
-    chdir: /data/wwwroot/redmine
-
-- name: Database schema objects creation
-  shell: RAILS_ENV=production bundle exec rake db:migrate
-  args:
-    chdir: /data/wwwroot/redmine
-
-- name: Database default data set
-  shell: echo '{{redmine_lang}}' | RAILS_ENV=production bundle exec rake redmine:load_default_data 
-  args:
-    chdir: /data/wwwroot/redmine
-
-- name: create directory for redmine
-  file:
-    path: /data/wwwroot/redmine/{{item}}
-    owner: redmine 
-    group: redmine
-    state: directory
-    recurse: yes    
-    mode: 755
-  with_items:
-    - tmp/pdf
-    - tmp/pids
-    - public/plugin_assets
-
-- name: Set redmine service
-  copy:
-    src: redmine.service
-    dest: /lib/systemd/system/redmine.service
-  
-- name: Start and enable redmine
-  service: name=redmine state=started enabled=yes
-
-- name:  File system permissions
+- name: Create a redmine dir
   file: 
-    path: /data/wwwroot/redmine
-    owner: redmine 
-    group: redmine
     state: directory
-    recurse: yes
+    path: /data/wwwroot/redmine
 
-# Check version
-- block:
-  - name: Check redmine Version
-    shell: sudo echo "redmine version:" "{{redmine_version.stdout}}" | sudo tee -a /data/logs/install_version.txt
+- name: Copy docker-compose file
+  template: 
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+  with_items:
+    - {src: docker-compose.yml,dest:/data/wwwroot/redmine/docker-compose.yml}
 
-# check service state
-  - name: Check redmine Service
-    shell: systemctl status redmine | grep Active*
-    register: check_redmine_service
-    notify: check_redmine_service
+- name: Run docker-compose 
+  shell: | 
+    docker-compose up -d
+    sleep 30
+  args:
+    chdir: /data/wwwroot/redmine
+
+# check service and version
+- name: Check redmine service 
+  shell: echo "redmine" `docker inspect redmine |grep -i status`
+  register: check_redmine_service
+  notify: check_redmine_service
+    
+- name: Check redmine version
+  shell: >
+    sudo echo "redmine version:" $(docker inspect redmine:latest |grep REDMINE_VERSION |head -1 |cut -d= -f2) |sudo tee -a /data/logs/install_version.txt  

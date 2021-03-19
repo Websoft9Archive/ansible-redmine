@@ -1,42 +1,13 @@
-# Global
-region: "0"
+common_install_docker: True
 
-common_os_support: ["CentOS", "Ubuntu", "Amazon"]
 
-ruby_version: "2.4"
-
-nginx_reverse_proxy_port: "9292"
-nginx_certbot: True
-nginx_appname: "redmine"
-nginx_vhost_mode: "reverse"
-
-mysql_version: "5.7"  
-mysql_root_password: "123456"  
-
-docker_applications: 
-  - phpmyadmin
-
-mysql_databases: 
-  - name: redmine
-
-mysql_users: 
-  - name: redmine
-    priv: 'redmine.*:ALL'
-
-init_db: 
-  mysql:
-    admin: root
-    users: ["redmine"]
-    password: "123456"
-    config_paths: 
-      - /data/wwwroot/redmine/config/database.yml
-      
-init_application:
+init_docker:
   redmine:
-    username: admin
-    password: "admin"
-    service_after: "redmine.service"
-    commands: 
-      - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
-      - mysql -uroot -p$new_password -e "use redmine;update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"
-      - sudo sleep 15 && sudo systemctl restart redmine
+    db_username: redmine
+    db_password: "123456" 
+    admin_username: admin
+    admin_password: "123456"
+    service_after: "docker.service"
+    compose_path: "/data/wwwroot/redmine/docker-compose.yml"
+    compose_commands:
+      - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/docker-compose.yml
