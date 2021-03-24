@@ -25,6 +25,9 @@
   args:
     chdir: /data/wwwroot/redmine
 
+- name: Copy the init password file on mysql container 
+  shell: docker cp /data/wwwroot/redmine/init_password.sh   mysql{{mysql_version}}:/tmp/init_password.sh
+
 # check service and version
 - name: Check redmine service 
   shell: echo "redmine" `docker inspect redmine |grep -i status`

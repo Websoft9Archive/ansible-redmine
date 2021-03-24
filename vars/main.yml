@@ -1,10 +1,20 @@
 common_install_docker: True
+docker_install: False
+mysql_docker: True
+
 docker_applications: [phpmyadmin]
 
 nginx_appname: "redmine"
 nginx_vhost_mode: "reverse"
 nginx_reverse_proxy_port: "9007"
 nginx_certbot: True
+
+mysql_databases:
+ - name: redmine
+ 
+mysql_users:
+ - name: redmine
+   priv: 'redmine.*:ALL'
 
 init_docker:
   redmine:
