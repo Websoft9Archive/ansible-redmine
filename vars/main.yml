@@ -17,6 +17,19 @@ mysql_users:
    priv: 'redmine.*:ALL'
 
 init_docker:
+  mysql:
+    db: mysql
+    db_name: redmine
+    db_username: root
+    db_password: "123456"
+    service_after: "docker.service"
+    compose_path: "/data/db/mysql{{mysql_version}}/docker-compose.yml"
+    compose_commands:
+      - sudo sed -i "s/123456/$new_password/g" /data/db/mysql{{mysql_version}}/docker-compose.yml
+    volumes:
+      - /data/db/mysql{{mysql_version}}/data
+
+init_docker:
   redmine:
     db: mysql
     db_username: redmine
@@ -28,7 +41,11 @@ init_docker:
     compose_path: "/data/wwwroot/redmine/docker-compose.yml"
     compose_commands:
       - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/docker-compose.yml
+    volumes:
+      - /data/redmine
     commands: 
       - sudo docker exec -it mysql-redmine bash -c 'bash /tmp/init_password.sh'
       - sudo docker restart redmine
       - sudo systemctl restart nginx
+
+
