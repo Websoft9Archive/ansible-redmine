@@ -12,6 +12,7 @@ services:
     environment:
       REDMINE_DB_MYSQL: {{redmine_db_host}}
       REDMINE_DB_PORT: {{redmine_db_port}}
+      REDMINE_DB_USERNAME: "{{redmine_db_username}}"
       REDMINE_DB_PASSWORD: {{redmine_db_password}}
       REDMINE_SECRET_KEY_BASE: supersecretkey
        

@@ -1,3 +1,4 @@
 redmine_db_password: "123456"
 redmine_db_port: "3306"
 redmine_db_host: "172.17.0.1"
+redmine_db_username: "redmine"
