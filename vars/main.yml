@@ -36,6 +36,7 @@ init_docker:
     compose_path: "/data/wwwroot/redmine/docker-compose.yml"
     compose_commands:
       - sudo docker-compose -f /data/db/mysql{{mysql_version}}/docker-compose.yml up -d
+      - sudo sleep 5
       - sudo docker cp /data/wwwroot/redmine/init_password.sh   mysql{{mysql_version}}:/tmp/init_password.sh
       - sudo docker exec -it mysql{{mysql_version}} bash -c 'bash /tmp/init_password.sh'
     volumes:
