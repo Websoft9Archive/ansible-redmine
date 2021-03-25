@@ -1,5 +1,7 @@
 common_install_docker: True
 docker_install: False
+
+mysql_version: "5.7"
 mysql_docker: True
 
 docker_applications: [phpmyadmin]
@@ -33,12 +35,11 @@ init_docker:
     service_after: "docker.service"
     compose_path: "/data/wwwroot/redmine/docker-compose.yml"
     compose_commands:
+      - sudo docker-compose -f /data/db/mysql{{mysql_version}}/docker-compose.yml up -d
       - sudo docker cp /data/wwwroot/redmine/init_password.sh   mysql{{mysql_version}}:/tmp/init_password.sh
       - sudo docker exec -it mysql{{mysql_version}} bash -c 'bash /tmp/init_password.sh'
     volumes:
       - /data/redmine
-    commands:
-      - sudo docker restart mysql{{mysql_version}}
 
 
 
