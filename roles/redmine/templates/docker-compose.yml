@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  redmine:
+    image: redmine
+    container_name: "redmine"
+    restart: always
+    ports:
+      - 9007:3000
+    volumes: 
+      - /data/redmine:/usr/src/redmine/files
+    environment:
+      REDMINE_DB_MYSQL: {{redmine_db_host}}
+      REDMINE_DB_PORT: {{redmine_db_port}}
+      REDMINE_DB_USERNAME: "{{redmine_db_username}}"
+      REDMINE_DB_PASSWORD: {{redmine_db_password}}
+      REDMINE_SECRET_KEY_BASE: supersecretkey
+       
+
+networks:
+  default:
+    external:
+      name: "apps"
