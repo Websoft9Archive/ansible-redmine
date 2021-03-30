@@ -1,34 +1,12 @@
 common_install_docker: True
 docker_install: False
 
-mysql_version: "5.7"
-mysql_docker: True
-
 docker_applications: [phpmyadmin]
 
 nginx_appname: "redmine"
 nginx_vhost_mode: "reverse"
 nginx_reverse_proxy_port: "9007"
 nginx_certbot: True
-
-mysql_databases:
- - name: redmine
- 
-mysql_users:
- - name: redmine
-   priv: 'redmine.*:ALL'
-
-
-init_db: 
-  mysql:
-    admin: root
-    users: ["redmine"]
-    password: "123456"  
-    config_paths:
-      - /data/db/mysql{{mysql_version}}/docker-compose.yml
-      - /data/wwwroot/redmine/docker-compose.yml
-    commands:
-      - sudo docker-compose -f /data/db/mysql{{mysql_version}}/docker-compose.yml up -d
 
 init_docker:
   redmine:
@@ -37,10 +15,10 @@ init_docker:
     service_after: "docker.service"
     compose_path: "/data/wwwroot/redmine/docker-compose.yml"
     compose_commands:  
-      - sudo docker cp /data/wwwroot/redmine/init_password.sh   mysql{{mysql_version}}:/tmp/init_password.sh
-      - sudo docker exec -i mysql{{mysql_version}} bash -c 'bash /tmp/init_password.sh'
+      - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/docker-compose.yml
     volumes:
-      - /data/redmine
+      - /data/wwwroot/redmine/mysql_data
+      - /data/wwwroot/redmine/data
 
 
 

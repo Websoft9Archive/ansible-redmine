@@ -1,22 +1,16 @@
-- name: Create a redmine dir
+- name: Create dir for redmine
   file: 
     state: directory
     path: "{{item}}"
   loop: 
     - /data/wwwroot/redmine
-    - /data/redmine
-
-- name: Copy init password file 
-  copy: 
-    src: init_password.sh
-    dest: /data/wwwroot/redmine/init_password.sh
+    - /data/db/mysql
     
-- name: Copy docker-compose file
-  template: 
-    src: '{{item.src}}'
-    dest: '{{item.dest}}'
-  with_items:
-    - {src: docker-compose.yml,dest: /data/wwwroot/redmine/docker-compose.yml}
+- name: Clone redmine in Websoft9 
+  git:
+    repo: "{{redmine_url}}"
+    dest: "/data/wwwroot/redmine"
+    version: dev
 
 - name: Run docker-compose 
   shell: | 
@@ -25,8 +19,16 @@
   args:
     chdir: /data/wwwroot/redmine
 
-- name: Copy the init password file on mysql container 
-  shell: docker cp /data/wwwroot/redmine/init_password.sh   mysql{{mysql_version}}:/tmp/init_password.sh
+- name: Set soft link for redmine
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+    force: yes
+  with_items:
+  - {src: /data/wwwroot/redmine/mysql_data/,dest: /data/db/mysql/data}
+  - {src: /data/wwwroot/redmine/config/,dest: /data/db/mysql/config}
+  - {src: /data/wwwroot/redmine/config/,dest: /data/config/mysql}
 
 # check service and version
 - name: Check redmine service 
