@@ -10,6 +10,10 @@ nginx_certbot: True
 
 init_docker:
   redmine:
+    db: redmine
+    db_name: redmine
+    db_username: root
+    db_password: "123456"
     admin_username: admin
     admin_password: "admin"
     service_after: "docker.service"
