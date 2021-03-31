@@ -12,17 +12,17 @@
     dest: "/data/wwwroot/redmine"
     version: dev
 
-- name: Copy init script
-  copy:
-    src: init_password.sh
-    dest: /data/wwwroot/redmine/docker-entrypoint-initdb.d/init_password.sh
-
 - name: Run docker-compose 
   shell: | 
     docker-compose up -d
     sleep 30
   args:
     chdir: /data/wwwroot/redmine
+
+- name: Copy init script
+  copy:
+    src: init_password.sh
+    dest: /data/wwwroot/redmine/docker-entrypoint-initdb.d/init_password.sh
 
 - name: Set soft link for redmine
   file:
