@@ -19,11 +19,6 @@
   args:
     chdir: /data/wwwroot/redmine
 
-- name: Copy init script
-  copy:
-    src: init_password.sh
-    dest: /data/wwwroot/redmine/docker-entrypoint-initdb.d/init_password.sh
-
 - name: Set soft link for redmine
   file:
     src: '{{item.src}}'
