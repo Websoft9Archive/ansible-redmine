@@ -24,7 +24,7 @@ init_docker:
       - /data/wwwroot/redmine/mysql_data
       - /data/wwwroot/redmine/data
     commands:
-      - sudo docker exec -i mysql5.7 bash -c 'bash /docker-entrypoint-initdb.d/init_password.sh'
+      - sudo docker exec -i redmine-mysql bash -c 'bash /docker-entrypoint-initdb.d/init_password.sh'
 
 
 
