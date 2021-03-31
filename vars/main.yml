@@ -2,6 +2,7 @@ common_install_docker: True
 docker_install: False
 
 mysql_install_server: False
+mysql_version: "5.7"
 
 docker_applications: [phpmyadmin]
 
