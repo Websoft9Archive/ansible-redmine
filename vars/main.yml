@@ -27,8 +27,9 @@ init_docker:
       - /data/wwwroot/redmine/mysql_data
       - /data/wwwroot/redmine/data
     commands:
-      - sudo docker exec -i redmine-mysql bash -c 'bash /docker-entrypoint-initdb.d/init_password.sh'
-
+      - sleep 10
+      - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
+      - sudo mysql -uroot -p$new_password -h 127.0.0.1 redmine -e "update users set hashed_password = '$app_pass', salt ='', admin = 1 where login = 'admin';"
 
 
 
