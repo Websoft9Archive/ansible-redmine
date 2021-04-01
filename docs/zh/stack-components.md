@@ -6,9 +6,10 @@ Redmine 预装包包含 Redmine 运行所需一序列支撑软件（简称为“
 
 ### Redmine
 
-Redmine 程序路径：*/data/wwwroot/redmine*  
-Redmine 配置文件：*/data/wwwroot/redmine/config/settings.yml*  
-Redmine 数据库连接配置：*/data/wwwroot/redmine/config/database.yml*
+本部署方案中的 Zabbix 采用 Docker 部署，运行 `docker ps` 查看运行的容器。
+
+Redmine 安装目录：*/data/wwwroot/redmine*  
+Redmine 配置文件：*/data/wwwroot/redmine/docker-compose.yml*  
 
 ### Nginx
 
@@ -16,11 +17,6 @@ Nginx 虚拟主机配置文件：*/etc/nginx/conf.d/default.conf*
 Nginx 主配置文件： */etc/nginx/nginx.conf*  
 Nginx 日志文件： */var/log/nginx*  
 Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
-
-### Ruby
-
-Ruby 安装目录：*/usr/lib/ruby*  
-Ruby 虚拟机目录：*/usr/bin/ruby*  
 
 ### MySQL
 
@@ -65,9 +61,6 @@ sudo cat /data/logs/install_version.txt
 
 # Linux Version
 lsb_release -a
-
-# Ruby
-ruby -v
 
 # Nginx version
 nginx -v

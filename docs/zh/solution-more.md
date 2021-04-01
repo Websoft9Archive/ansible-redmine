@@ -16,40 +16,37 @@ Redmine 具体绑定域名操作：
    sudo systemctl restart redmine
    ```
 
-
 ## 插件
 
-通过 Redmine 提供的[插件](https://www.redmine.org/plugins)可以扩展它的功能：
+通过 Redmine 提供的[插件中心](https://www.redmine.org/plugins)可以扩展它的功能：
 
 ### 安装插件
 
-1. 使用 SFTP 工具连接服务器  
-2. 下载插件到 */data/wwwroot/redmine/plugins*  
-3. cd 到 */data/wwwroot/redmine* 目录下执行命令
+下面以一个具体的插件为例说明如何安装插件：  
+
+1. 获取[Ajax Redmine Issue Dynamic Edit](https://www.redmine.org/plugins/redmine_issue_dynamic_edit) 插件的下载地址
+2. 使用 SFTP 登录服务，分别运行如下命令
    ```
-   bundle exec rake redmine:plugins:migrate RAILS_ENV=production
+   # 进入 Redmine 目录
+   cd /data/wwwroot/redmine
+   wget https://www.redmine.org/attachments/download/25386/redmine_issue_dynamic_edit.zip
+   unzip redmine_issue_dynamic_edit.zip 
+   docker cp redmine_issue_dynamic_edit redmine:/usr/src/redmine/plugins
    ```
-4. 重启服务
+4. 重启 Redmine 容器
    ```
-   sudo systemctl restart nginx
-   sudo systemctl restart redmine
+   sudo docker restart redmine
    ```
-5. 登陆 Redmine 查看插件是否安装好
+5. 登陆 Redmine 控制台查看插件
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-installplugindy-websoft9.png)
 
 
 ### 卸载插件
 
-1. 使用 SFTP 工具连接服务器  
-2. cd 到 */data/wwwroot/redmine* 目录下执行命令
+1. 使用 SFTP 删除 /data/wwwroot/redmine/plugins 对应的插件
+2. 重启 Redmine 容器生效
    ```
-   bundle exec rake redmine:plugins:migrate NAME=plugin_name VERSION=0 RAILS_ENV=production   #  plugin_name 为插件名称
-   ```
-3. 使用 SFTP 删除 /data/wwwroot/redmine/plugins 对应的插件
-
-4. 重启服务
-   ```
-   sudo systemctl restart nginx
-   sudo systemctl restart redmine
+   sudo docker restart redmine
    ```
 
 ## 更改数据库
