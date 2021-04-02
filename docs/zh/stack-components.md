@@ -6,7 +6,7 @@ Redmine 预装包包含 Redmine 运行所需一序列支撑软件（简称为“
 
 ### Redmine
 
-本部署方案中的 Zabbix 采用 Docker 部署，运行 `docker ps` 查看运行的容器。
+本部署方案中的 Redmine 采用 Docker 部署，运行 `docker ps` 查看运行的容器。
 
 Redmine 安装目录：*/data/wwwroot/redmine*  
 Redmine 配置文件：*/data/wwwroot/redmine/docker-compose.yml*  
@@ -20,12 +20,12 @@ Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
 
 ### MySQL
 
-MySQL 安装目录: *usr/local/mysql*  
-MySQL 配置文件: *etc/my.cnf*   
-MySQL 数据目录：*/data/mysql*   
-MySQL 日志文件: */var/log/mysql/mysqld.log*   
-MySQL PID: */run/mysqld/mysqld.pid*   
-MySQL Socket: */var/lib/mysql/mysql.sock*  
+本项目中 phpMyAdmin 是采用 Docker 方式来安装的
+
+MySQL 容器启动脚本: *data/wwwroot/redmine/docker-entrypoint-initdb.d* 
+MySQL 配置文件: *data/wwwroot/redmine/mysql_config/conf.d*   
+MySQL 数据目录：*/data/wwwroot/redmine/mysql_data*   
+  
 MySQL 可视化管理地址: *http://服务器公网IP:9090*
 
 ### phpMyAdmin

@@ -4,7 +4,7 @@
 
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-getpassword-websoft9.png)
 
-下面列出可能需要用到的几组账号密码：：
+下面列出可能需要用到的几组账号密码：
 
 ## Redmine
 

@@ -24,4 +24,25 @@ yum update -y
 
 ## Redmine升级
 
+Redmine 升级大致流程：先拉取最新版本的 Redmine 镜像，然后重新运行容器。
+
+> Redmine 升级之前请完成服务器的快照备份，以防不测。
+
+1. 使用 SSH 登录 Redmine 服务器后，停止容器
+
+   ```
+   cd /data/wwwroot/redmine 
+   docker-compose down -v
+   ```
+
+2. 拉取最新版本镜像
+   ```
+   docker image pull redmine:latest
+   ```
+
+3. 重新运行 docker-compose 编排文件，启用新的容器
+    ```
+    docker-compose up -d
+    ```
+
 Redmine 官方提供了详细的升级方案：[RedmineUpgrade](https://www.redmine.org/projects/redmine/wiki/RedmineUpgrade)

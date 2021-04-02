@@ -5,10 +5,17 @@
 ### Redmine
 
 ```shell
-sudo systemctl start redmine 
-sudo systemctl stop redmine
-sudo systemctl restart redmine 
-sudo systemctl status redmine
+sudo docker start redmine
+sudo docker restart redmine
+sudo docker stop redmine
+```
+
+### MySQL
+
+```shell
+sudo docker start redmine-mysql
+sudo docker restart redmine-mysql
+sudo docker stop redmine-mysql
 ```
 
 ### Nginx
@@ -18,15 +25,6 @@ sudo systemctl start nginx
 sudo systemctl stop nginx
 sudo systemctl restart nginx
 sudo systemctl status nginx
-```
-
-### MySQL
-
-```shell
-sudo systemctl start mysql
-sudo systemctl stop mysql
-sudo systemctl restart mysql
-sudo systemctl status mysql
 ```
 
 ### Docker
