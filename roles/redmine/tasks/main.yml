@@ -13,6 +13,7 @@
   git:
     repo: "{{redmine_url}}"
     dest: "/data/wwwroot/redmine"
+    version: dev
 
 - name: Run docker-compose 
   shell: | 
