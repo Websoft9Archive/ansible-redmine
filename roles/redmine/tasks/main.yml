@@ -30,8 +30,8 @@
     force: yes
   with_items:
   - {src: /data/wwwroot/redmine/mysql_data/,dest: /data/db/mysql/data}
-  - {src: /data/wwwroot/redmine/mysql_config/conf.d/,dest: /data/db/mysql/conf.d}
-  - {src: /data/wwwroot/redmine/mysql_config/conf.d/,dest: /data/config/mysql/conf.d}
+  - {src: /data/wwwroot/redmine/mysql_config/conf.d/,dest: /data/db/mysql/config}
+  - {src: /data/wwwroot/redmine/mysql_config/conf.d/,dest: /data/config/mysql}
 
 # check service and version
 - name: Check redmine service 
