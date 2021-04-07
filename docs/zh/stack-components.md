@@ -22,8 +22,8 @@ Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
 
 本项目中 phpMyAdmin 是采用 Docker 方式来安装的
 
-MySQL 容器启动脚本: *data/wwwroot/redmine/docker-entrypoint-initdb.d* 
-MySQL 配置文件: *data/wwwroot/redmine/mysql_config/conf.d*   
+MySQL 容器启动脚本: *data/wwwroot/redmine/docker-entrypoint-initdb.d*  
+MySQL 配置文件: *data/wwwroot/redmine/mysql_config/conf.d*     
 MySQL 数据目录：*/data/wwwroot/redmine/mysql_data*   
   
 MySQL 可视化管理地址: *http://服务器公网IP:9090*
