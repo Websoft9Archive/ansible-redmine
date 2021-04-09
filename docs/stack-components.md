@@ -4,16 +4,19 @@ The Redmine deployment package contains a sequence software (referred to as "com
 
 ## Path
 
+This solution use Docker to deploy all service, you can run the command `docker ps` to list them  
+
+```
+CONTAINER ID   IMAGE                           COMMAND                  CREATED              STATUS                PORTS                               NAMES
+4ff55aec7671   redmine                         "/docker-entrypoint.…"   11 seconds ago       Up 10 seconds         0.0.0.0:9010->3000/tcp              redmine
+3067c535663b   mysql:5.7                       "docker-entrypoint.s…"   About a minute ago   Up 58 seconds         33060/tcp, 0.0.0.0:3309->3306/tcp   redmine-mysql
+```
+
 ### Redmine
 
 Redmine installation: */data/wwwroot/redmine*  
-Redmine configuration file: */data/wwwroot/redmine/config/settings.yml*  
-Redmine database configuration: */data/wwwroot/redmine/config/database.yml*
-
-### Ruby
-
-Ruby install directory: */usr/lib/ruby*  
-Ruby vm directory: */usr/bin/ruby*  
+Redmine Docker configuration file: */data/wwwroot/redmine/docker-compose.yml*  
+Redmine configuration: */data/wwwroot/redmine/config/configuration.yml*  
 
 ### Nginx
 
@@ -24,12 +27,8 @@ Nginx rewrite files directory: */etc/nginx/conf.d/rewrite*
 
 ### MySQL
 
-MySQL install directory: */usr/share/mysql*  
-MySQL data directory: */data/mysql*  
-MySQL Configuration File: */etc/my.cnf*  
-MySQL error log: */var/log/mysql/mysqld.log*  
-MySQL Process Identification Number: */run/mysqld/mysqld.pid*  
-MySQL Socket: */var/lib/mysql/mysql.sock*  
+MySQL data directory: */data/db/mysql*  
+MySQL Web Management refer to [MySQL Management](/admin-mysql.md)
 
 ### phpMyAdmin
 
@@ -64,9 +63,6 @@ sudo cat /data/logs/install_version.txt
 # Linux Version
 lsb_release -a
 
-# Ruby
-ruby -v
-
 # Nginx version
 nginx -v
 
@@ -74,7 +70,10 @@ nginx -v
 nginx -V
 
 # MySQL version
-mysql -V
+docker inspect redmine-mysql | grep "MYSQL_VERSION"
+
+# Redmine Version
+docker inspect redmine:latest |grep REDMINE_VERSION |head -1 |cut -d= -f2
 
 # Docker Version
 docker -v

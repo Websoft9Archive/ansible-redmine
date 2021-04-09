@@ -52,8 +52,13 @@ sidebarDepth: 3
 
 通用的手动备份操作步骤如下：
 
-1. 通过 WinSCP 将网站目录（*/data*）**压缩后**再完整的下载到本地
-2. 将所有文件放到同一个文件夹，根据日期命名
-3. 备份工作完成
+1. 通过 WinSCP 将网站目录（*/data/wwwroot/redmine*）**压缩后**再完整的下载到本地
+
+2. 通过 phpMyAdmin 逐个导出数据库
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-export-websoft9.png)
+
+3. 将所有文件放到同一个文件夹，根据日期命名
+
+4. 备份工作完成
 
 更多备份相关方案，参考官方文档：[《RedmineBackupRestore》](https://redmine.org/projects/redmine/wiki/RedmineBackupRestore)

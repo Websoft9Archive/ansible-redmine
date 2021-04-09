@@ -4,12 +4,21 @@ Redmine 预装包包含 Redmine 运行所需一序列支撑软件（简称为“
 
 ## 路径
 
-### Redmine
-
 本部署方案中的 Redmine 采用 Docker 部署，运行 `docker ps` 查看运行的容器。
 
+```
+CONTAINER ID   IMAGE                           COMMAND                  CREATED              STATUS                PORTS                               NAMES
+4ff55aec7671   redmine                         "/docker-entrypoint.…"   11 seconds ago       Up 10 seconds         0.0.0.0:9010->3000/tcp              redmine
+3067c535663b   mysql:5.7                       "docker-entrypoint.s…"   About a minute ago   Up 58 seconds         33060/tcp, 0.0.0.0:3309->3306/tcp   redmine-mysql
+```
+
+### Redmine
+
 Redmine 安装目录：*/data/wwwroot/redmine*  
-Redmine 配置文件：*/data/wwwroot/redmine/docker-compose.yml*  
+Redmine 容器配置文件：*/data/wwwroot/redmine/docker-compose.yml*  
+Redmine 系统配置文件：*/data/wwwroot/redmineconfig/configuration.yml*  
+
+> configuration.yml 用于对 Redmine 进行个性配置，例如：设置 SMTP
 
 ### Nginx
 
@@ -20,11 +29,10 @@ Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
 
 ### MySQL
 
-本项目中 phpMyAdmin 是采用 Docker 方式来安装的
+本项目中 phpMyAdmin 是采用 Docker 方式来安装  
 
-MySQL 容器启动脚本: *data/wwwroot/redmine/docker-entrypoint-initdb.d*  
-MySQL 配置文件: *data/wwwroot/redmine/mysql_config/conf.d*     
-MySQL 数据目录：*/data/wwwroot/redmine/mysql_data*   
+MySQL 配置文件目录: */data/db/mysql/mysql_config/conf.d*  
+MySQL 数据目录：*/data/db/mysql/mysql_data*   
   
 MySQL 可视化管理地址: *http://服务器公网IP:9090*
 
@@ -69,7 +77,10 @@ nginx -v
 nginx -V
 
 # MySQL version
-mysql -V
+docker inspect redmine-mysql | grep "MYSQL_VERSION"
+
+# Redmine Version
+docker inspect redmine:latest |grep REDMINE_VERSION |head -1 |cut -d= -f2
 
 # Docker Version
 docker -v

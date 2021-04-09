@@ -2,19 +2,24 @@
 
 下面每一个方案，都经过实践证明行之有效，希望能够对你有帮助
 
-## 域名绑定
+绑定域名的前置条件是：已经完成域名解析（登录域名控制台，增加一个A记录指向服务器公网IP）  
 
-绑定域名的前置条件是：Redmine已经可以通过解析后的域名访问。虽然如此，从服务器安全和后续维护考量，**域名绑定**步骤不可省却  
+完成域名解析后，从服务器安全和后续维护考量，需要完成**域名绑定**：
 
-Redmine 具体绑定域名操作：
+Redmine 域名绑定操作步骤：
 
-1. 使用 WinSCP 打开文件：/data/wwwroot/redmine/config/configuration.yml
-2. 修改配置文件中与域名相关的值，然后保存
-3. 重启服务后生效
+1. 确保域名解析已经生效  
+2. 使用 SFTP 工具登录云服务器
+3. 修改 [Nginx虚拟机主机配置文件](/zh/stack-components.md#nginx)，将其中的 **server_name** 项的值修改为你的域名
+   ```text
+   server
+   {
+   listen 80;
+   server_name rabbitmq.yourdomain.com;  # 此处修改为你的域名
+   ...
+   }
    ```
-   sudo systemctl restart nginx
-   sudo systemctl restart redmine
-   ```
+4. 保存配置文件，重启 [Nginx 服务](/zh/admin-services.md#nginx)
 
 ## 插件
 
@@ -24,7 +29,8 @@ Redmine 具体绑定域名操作：
 
 下面以一个具体的插件为例说明如何安装插件：  
 
-1. 获取[Ajax Redmine Issue Dynamic Edit](https://www.redmine.org/plugins/redmine_issue_dynamic_edit) 插件的下载地址
+1. 进入[Ajax Redmine Issue Dynamic Edit](https://www.redmine.org/plugins/redmine_issue_dynamic_edit) 插件页面，获取其下载地址
+
 2. 使用 SFTP 登录服务，分别运行如下命令
    ```
    # 进入 Redmine 目录
@@ -33,10 +39,12 @@ Redmine 具体绑定域名操作：
    unzip redmine_issue_dynamic_edit.zip 
    docker cp redmine_issue_dynamic_edit redmine:/usr/src/redmine/plugins
    ```
-4. 重启 Redmine 容器
+
+4. 重启 Redmine 容器服务
    ```
    sudo docker restart redmine
    ```
+   
 5. 登陆 Redmine 控制台查看插件
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-installplugindy-websoft9.png)
 
@@ -51,9 +59,17 @@ Redmine 具体绑定域名操作：
 
 ## 更改数据库
 
-在使用 Redmine 的过程中，如果更换了数据库（例如：从MySQL更换到PostgreSQL）或修改了数据库密码，会导致系统无法访问，只需：  
+在使用 Redmine 的过程中，如果更换了数据库密码，会导致系统无法访问。
 
-修改 Redmine 数据库连接配置：*/data/wwwroot/redmine/config/database.yml* 中相关的连接参数
+此时，需要通过如下步骤完成数据库更改操作：
+
+1. 使用 SFTP 连接服务器，修改 */data/wwwroot/redmine/docker-compose.yml* 文件中的数据库信息
+2. 重新运行 Remine 容器服务
+   ```
+   cd /data/wwwroot/redmine
+   docker-compose up -d
+   ```
+如果更换数据库（例如：MySQL更换到 PostgreSQL），则需要完成数据库迁移工作。
 
 ## LDAP
 

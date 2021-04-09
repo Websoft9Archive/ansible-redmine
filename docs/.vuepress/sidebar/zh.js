@@ -30,7 +30,7 @@ module.exports = [
     children: [
       '/zh/admin-services',
       '/zh/admin-database',
-      ['https://support.websoft9.com/docs/linux/zh/lang-ruby.html','Ruby'],
+      ['https://support.websoft9.com/docs/linux/zh/webs-nginx.html','Nginx'],
       ['https://support.websoft9.com/docs/linux/zh/admin-practices.html','Linux'],
     ]
   },
