@@ -26,4 +26,20 @@ yum update -y
 
 ## Redmine Upgrade
 
-Please refer to official docs:[RedmineUpgrade](https://www.redmine.org/projects/redmine/wiki/RedmineUpgrade)
+This deployment solution is based on Docker and so you can upgrade Redmine by the standard process of Docker:  
+
+> You should complete a snapshot backup before upgrade
+
+1. Use **SSH** to login Server, cd to the directory of docker-compose file, then pull images
+   ```
+   cd /data/wwwroot/redmine
+   docker-compose pull
+   ```
+2. Stop the containers
+   ```
+   docker-compose down -v
+   ```
+3. Recreate containers
+   ```
+   docker-compose up -d
+   ```

@@ -24,4 +24,24 @@ yum update -y
 
 ## Redmine升级
 
-Redmine 官方提供了详细的升级方案：[RedmineUpgrade](https://www.redmine.org/projects/redmine/wiki/RedmineUpgrade)
+Redmine 采用 Docker 部署，其升级流程：拉取镜像 > 删除容器 > 重建容器
+
+> Redmine 升级之前请完成服务器的快照备份，以防不测。
+
+1. 使用 SSH 登录服务，进入到 redmine 目录后，拉取最新版本镜像
+   ```
+   cd /data/wwwroot/redmine
+   docker-compose pull
+   ```
+   > 系统会自动拉取最新版镜像，如果没有镜像可拉取，则无需更新
+
+2. 停止并删除当前的 Redmine 容器
+
+   ```
+   docker-compose down -v
+   ```
+
+3. 重新创建 Redmine 容器
+   ```
+   docker-compose up -d
+   ```

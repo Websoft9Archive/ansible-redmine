@@ -10,7 +10,7 @@ If you have completed the Redmine deployment on Cloud Platform, the following st
 
 ## Redmine Installation Wizard
 
-1. Using local Chrome or Firefox to visit the URL *http://domain name* or *http://Internet IP*, you will enter the register interface of Redmine
+1. Using local Chrome or Firefox to visit the URL *http://DNS* or *http://Instance's Internet IP*, you will enter the register interface of Redmine
 
 2. Click the 【Log in】 link, enter your username and password([Don't know password?](/zh/stack-components.md#redmine))
    ![Redmine login](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-login-websoft9.png)
@@ -28,6 +28,10 @@ If you have completed the Redmine deployment on Cloud Platform, the following st
    ![Redmine SSH key](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-userlanguage-websoft9.png)
 
 > More useful Redmine guide, please refer to [Redmine guide](https://www.redmine.org/projects/redmine/wiki/Guide)
+
+## Redmine Setup Wizard
+
+Coming soon...
 
 ## Q&A
 

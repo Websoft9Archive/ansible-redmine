@@ -15,9 +15,7 @@ Follow is the sample using **SendGrid's SMTP Service** to configure sending mail
    SMTP username: websoft9smpt
    SMTP password: #fdfwwBJ8f    
    ```
-2. Use SSH or SFTP to connect Server, copy */data/wwwroot/redmine/config/configuration.yml.example* and rename it to `configuration.yml`  
-
-3. Modify `configuration.yml` and add the following **SMTP segment** to the **production** part: 
+2. Use SSH or SFTP to connect Server, modify `configuration.yml` and add the following **SMTP segment** to the **production** part: 
    ```
     email_delivery: 
     delivery_method: :smtp
@@ -29,4 +27,9 @@ Follow is the sample using **SendGrid's SMTP Service** to configure sending mail
     user_name: "YouEmail" 
     password: "YouPassword"
     ```
-Redmine provides  official documentation for SMTP: [Email Configuration](https://www.redmine.org/projects/redmine/wiki/EmailConfiguration)
+3. Restart Redmine service
+   ```
+   sudo docker restart redmine
+   ```
+
+> Redmine provides  official documentation for SMTP: [Email Configuration](https://www.redmine.org/projects/redmine/wiki/EmailConfiguration)

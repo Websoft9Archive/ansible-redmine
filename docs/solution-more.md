@@ -10,12 +10,15 @@ Nonetheless, from the perspective of server security and subsequent maintenance 
 
 Redmine domain name binding steps:
 
-1. Use WinSCP to edit the file: */data/wwwroot/redmine/config/configuration.yml* 
-2. Modify the domain name related items and save it 
-3. Restart services
-   ```
-   sudo systemctl restart nginx
-   sudo systemctl restart redmine
+1. Connect your Cloud Server
+2. Modify [Nginx vhost configuration file](/stack-components.md#nginx), change the **server_name**'s value to your domain name
+   ```text
+   server
+   {
+   listen 80;
+   server_name www.example.com;  # set you domain here
+   ...
+   }
    ```
 
 ## Plugin
@@ -24,39 +27,38 @@ You can use the Redmine's [plugins](https://www.redmine.org/plugins) to extend f
 
 ### Install plugin
 
-1. Use the SFTP to connect server  
-2. Download the plugin to the directory: */data/wwwroot/redmine/plugins*  
-3. cd to the directory */data/wwwroot/redmine* and excuse the following command
-   ```
-   bundle exec rake redmine:plugins:migrate RAILS_ENV=production
-   ```
-4. Restart services
-   ```
-   sudo systemctl restart nginx
-   sudo systemctl restart redmine
-   ```
-5. Login to Redmine to check your plugin
+The following is a sample for how to install special plugin:  
 
+1. Access Redmine plugin [Ajax Redmine Issue Dynamic Edit](https://www.redmine.org/plugins/redmine_issue_dynamic_edit) page, and get the download URL
+
+2. Use **SFTP** to login Server, run the following commands
+   ```
+   cd /data/wwwroot/redmine
+   wget https://www.redmine.org/attachments/download/25386/redmine_issue_dynamic_edit.zip
+   unzip redmine_issue_dynamic_edit.zip 
+   docker cp redmine_issue_dynamic_edit redmine:/usr/src/redmine/plugins
+   ```
+
+4. Restart Redmine container service
+   ```
+   sudo docker restart redmine
+   ```
+   
+5. Login to Redmine console to enable you plugin
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-installplugindy-websoft9.png)
 
 ### Uninstall plugin
 
-1. Use the SFTP to connect server   
-3. cd to the directory */data/wwwroot/redmine* and excuse the following command
+1. Use **SFTP** to login Server, and delete the plugin at: */data/wwwroot/redmine/plugins*
+2. Restart Redmine service
    ```
-   bundle exec rake redmine:plugins:migrate NAME=plugin_name VERSION=0 RAILS_ENV=production   #  plugin_name 为插件名称
-   ```
-3. Use SFTP to delete your plugin in the directory: */data/wwwroot/redmine/plugins*
-
-4. Restart services
-   ```
-   sudo systemctl restart nginx
-   sudo systemctl restart redmine
+   sudo docker restart redmine
    ```
 
 ## Change database connection 
 
-When you changed database engin(e.g. MySQL to PostreSQL) or modify the database's password, your Redmine may be out of service.
-How to fix it? You need to modify the **database connection items** in the Redmine's database configuration file*/data/wwwroot/redmine/config/database.yml*
+When you changed database's password, your Redmine may be out of service.
+How to fix it? You need to modify the **database connection items** in the Redmine's docker configuration file*/data/wwwroot/redmine/docker-compose.yml*
 
 ## LDAP
 

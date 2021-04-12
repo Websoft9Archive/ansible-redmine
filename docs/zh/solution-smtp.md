@@ -15,9 +15,7 @@
    SMTP username: xxxx@xx.com
    SMTP password: #wwBJ8    //需要注意的是密码中不能包含单引号，否则出错
    ```
-2. 通过 SFTP 工具远程连接服务器，将 */data/wwwroot/redmine/config/configuration.yml.example* 文件复制一份，命名为 `configuration.yml`  
-
-3. 修改 `configuration.yml` 文件，找到 “production:”, 在production下面添加:  
+2. 通过 SFTP 连接服务器，修改 `configuration.yml` 文件，找到 “production:”, 在 production 下面添加并完善你的 SMTP 参数:  
    ```
     email_delivery: #(前面2个空格）
     delivery_method: :smtp #（前面4个空格）
@@ -30,5 +28,10 @@
     password: "YouPassword" #（前面6个空格）
     ```
     > 注意缩进/空格,按照规定格式配置，否则redmine报错
+
+3. 重启 Redmine 服务后生效
+   ```
+   sudo docker restart redmine
+   ```
 
 Redmine 官方提供了数十种不同 SMTP 配置方法，请参考官方文档： [Email Configuration](https://www.redmine.org/projects/redmine/wiki/EmailConfiguration)

@@ -1,8 +1,10 @@
 # SSL/HTTPS
 
-必须完成[域名绑定](/zh/solution-more.md)且可通过 HTTP 访问 Redmine ，才可以设置 HTTPS。
+网站完成[域名绑定](/zh/solution-more.html#域名绑定)且可以通过HTTP访问之后，方可设置HTTPS。
 
-Redmine 预装包，已安装Web服务器 SSL 模块和公共免费证书方案 [Let's Encrypt](https://letsencrypt.org/) ，并完成预配置。因此，除了虚拟主机配置文件之外，HTTPS 设置则不需要修改 Nginx 其他文件
+Redmine预装包，已安装Web服务器 SSL 模块和公共免费证书方案 [Let's Encrypt](https://letsencrypt.org/) ，并完成预配置。
+
+> 除了虚拟主机配置文件之外，HTTPS设置无需修改 Web 服务器的任何其他文件
 
 ## 快速指南
 

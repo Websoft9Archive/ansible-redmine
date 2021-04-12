@@ -1,10 +1,12 @@
 # MySQL
 
-LAMP 预装包中内置 MySQL 及可视化数据库管理工具 `phpMyadmin` ，使用请参考如下步骤：
+本部署方案中内置 MySQL 及可视化数据库管理工具 `phpMyadmin` ，使用请参考如下步骤：
 
 1. 本地浏览器 Chrome 或 Firefox 访问：*http://服务器公网IP:9090*，进入phpMyAdmin
   ![登录phpMyadmin](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-logincn-websoft9.png)
+
 2. 输入数据库用户名和密码([不知道密码？](/zh/stack-accounts.md))
+
 3. 开始管理数据库
   ![phpMyadmin](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-adddb-websoft9.png)
 
