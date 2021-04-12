@@ -1,26 +1,19 @@
 - name: Delete redmine dir for sec_installation
   shell: rm -rf /data/wwwroot/redmine
-
-- name: Create dir for redmine
-  file: 
-    state: directory
-    path: "{{item}}"
-  loop: 
-    - /data/wwwroot/redmine
-    - /data/db/mysql
     
 - name: Clone redmine in Websoft9 
   git:
     repo: "{{redmine_url}}"
     dest: "/data/wwwroot/redmine"
 
-- name: Create volumes dir for redmine
+- name: Create dir for redmine
   file: 
     state: directory
     path: "{{item}}"
   loop: 
     - /data/wwwroot/redmine/volumes
-    
+    - /data/db/mysql
+
 - name: Run docker-compose 
   shell: | 
     docker-compose -f docker-compose-production.yml up -d
@@ -48,7 +41,6 @@
 - name: Check redmine version
   shell: >
     sudo echo "redmine version:" $(docker inspect redmine:latest |grep REDMINE_VERSION |head -1 |cut -d= -f2) |sudo tee -a /data/logs/install_version.txt  
-
 - name: Check mysql version
   shell: >
-    sudo echo "mysql version:" $(docker images |grep mysql |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  
+    sudo echo "mysql version:" $(docker images |grep mysql |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt 
