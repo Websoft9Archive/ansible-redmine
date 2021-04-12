@@ -24,8 +24,7 @@ init_docker:
     compose_commands:  
       - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/docker-compose.yml
     volumes:
-      - /data/wwwroot/redmine/mysql_data
-      - /data/wwwroot/redmine/data
+      - /data/wwwroot/redmine/volumes
     commands:
       - sleep 10
       - app_pass=$(echo -n $new_password | sha1sum|awk 'BEGIN{ORS=""}{print $1}'|sha1sum|awk '{print $1}')
