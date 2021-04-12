@@ -1,19 +1,18 @@
 - name: Delete redmine dir for sec_installation
   shell: rm -rf /data/wwwroot/redmine
+    
+- name: Clone redmine in Websoft9 
+  git:
+    repo: "{{redmine_url}}"
+    dest: "/data/wwwroot/redmine"
 
 - name: Create dir for redmine
   file: 
     state: directory
     path: "{{item}}"
   loop: 
-    - /data/wwwroot/redmine
     - /data/wwwroot/redmine/volumes
     - /data/db/mysql
-    
-- name: Clone redmine in Websoft9 
-  git:
-    repo: "{{redmine_url}}"
-    dest: "/data/wwwroot/redmine"
 
 - name: Run docker-compose 
   shell: | 
