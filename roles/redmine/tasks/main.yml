@@ -7,7 +7,6 @@
     path: "{{item}}"
   loop: 
     - /data/wwwroot/redmine
-    - /data/wwwroot/redmine/volumes
     - /data/db/mysql
     
 - name: Clone redmine in Websoft9 
@@ -15,6 +14,13 @@
     repo: "{{redmine_url}}"
     dest: "/data/wwwroot/redmine"
 
+- name: Create volumes dir for redmine
+  file: 
+    state: directory
+    path: "{{item}}"
+  loop: 
+    - /data/wwwroot/redmine/volumes
+    
 - name: Run docker-compose 
   shell: | 
     docker-compose -f docker-compose-production.yml up -d
