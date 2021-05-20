@@ -22,7 +22,7 @@ init_docker:
     service_after: "docker.service"
     compose_path: "/data/wwwroot/redmine/docker-compose.yml"
     compose_commands:  
-      - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/docker-compose.yml
+      - sudo sed -i "s/123456/$new_password/g" /data/wwwroot/redmine/.env
     volumes:
       - /data/wwwroot/redmine/volumes
     commands:
