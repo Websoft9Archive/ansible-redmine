@@ -5,6 +5,7 @@
   git:
     repo: "{{redmine_url}}"
     dest: "{{redmine_work_dir}}"
+    version: dev
 
 - name: Create dir for redmine
   file: 
