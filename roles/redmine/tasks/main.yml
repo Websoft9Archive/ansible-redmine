@@ -14,9 +14,12 @@
     - '{{redmine_work_dir}}/volumes'
     - /data/db/mysql
 
-- name: Run docker-compose 
+- name: Rename and Run docker-compose 
   shell: | 
-    docker-compose -f docker-compose-production.yml up -d
+    rm -rf docker-compose.yml .env
+    mv docker-compose-production.yml docker-compose.yml
+    mv .env_all .env
+    docker-compose up -d
     sleep 30
   args:
     chdir: '{{redmine_work_dir}}'
@@ -40,7 +43,7 @@
     
 - name: Check redmine version
   shell: >
-    sudo echo "redmine version:" $(docker inspect redmine:latest |grep REDMINE_VERSION |head -1 |cut -d= -f2) |sudo tee -a /data/logs/install_version.txt  
+    sudo echo "redmine version:" $(docker images | grep redmine |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  
 - name: Check mysql version
   shell: >
     sudo echo "mysql version:" $(docker images |grep mysql |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt 
