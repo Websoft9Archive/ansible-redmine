@@ -1,17 +1,17 @@
 - name: Delete redmine dir for sec_installation
-  shell: rm -rf /data/wwwroot/redmine
+  shell: rm -rf {{redmine_work_dir}}
     
 - name: Clone redmine in Websoft9 
   git:
     repo: "{{redmine_url}}"
-    dest: "/data/wwwroot/redmine"
+    dest: "{{redmine_work_dir}}"
 
 - name: Create dir for redmine
   file: 
     state: directory
     path: "{{item}}"
   loop: 
-    - /data/wwwroot/redmine/volumes
+    - '{{redmine_work_dir}}/volumes'
     - /data/db/mysql
 
 - name: Run docker-compose 
@@ -19,7 +19,7 @@
     docker-compose -f docker-compose-production.yml up -d
     sleep 30
   args:
-    chdir: /data/wwwroot/redmine
+    chdir: '{{redmine_work_dir}}'
 
 - name: Set soft link for redmine
   file:
@@ -28,9 +28,9 @@
     state: link
     force: yes
   with_items:
-  - {src: /data/wwwroot/redmine/volumes/mysql_data/,dest: /data/db/mysql/data}
-  - {src: /data/wwwroot/redmine/volumes/mysql_config/conf.d/,dest: /data/db/mysql/config}
-  - {src: /data/wwwroot/redmine/volumes/mysql_config/conf.d/,dest: /data/config/mysql}
+  - {src: '{{redmine_work_dir}}/volumes/mysql_data/',dest: /data/db/mysql/data}
+  - {src: '{{redmine_work_dir}}/volumes/mysql_config/conf.d/',dest: /data/db/mysql/config}
+  - {src: '{{redmine_work_dir}}/volumes/mysql_config/conf.d/',dest: /data/config/mysql}
 
 # check service and version
 - name: Check redmine service 
