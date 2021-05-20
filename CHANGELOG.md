@@ -1,13 +1,14 @@
 # CHANGELOG
 
-## To do
+## Redmine v4.1.1-1 2021-01-04
+### Fixes and Enhancements
+- ubuntu use rvm install way #1
+- puma can't start for environment problem #2
 
-## Logs
+## Redmine v4.1.2-1 2021-03-29
+### Fixes and Enhancements
+- update install way to Docker
 
-### Bug Fixes
-
-* 2020-09-08  mysql的用户redmine随机密码不生效
-
-### Features
-
-* 2020-09-08  var变量定义错误，user需要改成users
+## Redmine v4.2-1 2021-05-20
+### Fixes and Enhancements
+- update to latest version(4.2)
