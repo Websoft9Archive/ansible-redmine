@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
         
     - name: npm install vuepress
       run: |
@@ -24,7 +24,7 @@ jobs:
     #  to azure blob
     - name: debug
       run: ls
-    - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
+    - uses: bacongobbler/azure-blob-storage-upload@v1.2.0
       with:
         source_dir: docs/html
         container_name: $web

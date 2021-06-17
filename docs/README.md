@@ -6,7 +6,7 @@ home: false
 
 This documentation is provided by [Websoft9](https://www.websoft9.com/), it can help users to acquire skills of Redmine Deployment, Installation, Configuration, HTTPS, SMTP, Backup, Upgrade, Connect Instance and more.
 
-[Redmine](https://www.redmine.org) Redmine is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.
+[Redmine](https://www.redmine.org/) Redmine is a flexible project management web application. Written using the Ruby on Rails framework, it is cross-platform and cross-database.
 
 ![Redmine interface](https://libs.websoft9.com/Websoft9/DocsPicture/zh/redmine/redmine-gui-websoft9.jpg)
 
