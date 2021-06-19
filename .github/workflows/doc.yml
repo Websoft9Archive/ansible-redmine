@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
         
     - name: npm install vuepress
       run: |
@@ -30,3 +30,4 @@ jobs:
         container_name: $web
         connection_string: ${{ secrets.Azure_blob }}
         extra_args: '--destination-path docs'
+        sync: false
