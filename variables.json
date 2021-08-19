@@ -11,8 +11,8 @@
   "requirements_configure_url": "https://www.redmine.org/projects/redmine/wiki/RedmineInstall#Requirements",
   "components": "Redmine, Ruby, Nginx, MySQL, Docker, phpmyadmin on Docker",
   "install_way": {
-    "en": "Package isntallation",
-    "zh": "包安装"
+    "en": "Docker isntallation",
+    "zh": "Docker 安装"
   },
   "install_url": "https://www.redmine.org/projects/redmine/wiki/Download"
 }
