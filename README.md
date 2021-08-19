@@ -62,7 +62,7 @@ This program provided by Websoft9 contains a series of software with separate co
 
 #### How to install and view the latest release?
 
-This repository install way is Package isntallation, you can  view the version from [Official URL](https://www.redmine.org/projects/redmine/wiki/Download).  
+This repository install way is Docker isntallation, you can  view the version from [Official URL](https://www.redmine.org/projects/redmine/wiki/Download).  
 We will check [Release version](https://github.com/Websoft9/ansible-redmine/releases) regularly. Update and test this project to ensure that users can successfully install the required version of Redmin.
 
 #### Can I run this repository on Ansible Tower? 
