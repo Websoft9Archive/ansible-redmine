@@ -15,10 +15,7 @@
     - /data/db/mysql
 
 - name: Rename and Run docker-compose 
-  shell: | 
-    rm -rf docker-compose.yml .env
-    mv docker-compose-production.yml docker-compose.yml
-    mv .env_all .env
+  shell: |
     docker-compose up -d
     sleep 30
   args:
