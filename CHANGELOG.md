@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Redmine v4.2.3-1 2021-12-16
+### Fixes and Enhancements
+- Now latest version is v4.2.3
+
 ## Redmine v4.1.1-1 2021-01-04
 ### Fixes and Enhancements
 - ubuntu use rvm install way #1
