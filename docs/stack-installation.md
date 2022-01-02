@@ -21,11 +21,13 @@ If you have completed the Redmine deployment on Cloud Platform, the following st
 4. Open 【project】and create new project
    ![Redmine new project](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-createproject-websoft9.png)
 
-5. Go to 【administrator】>【Settings】>【display】 to set the project's language
+5. Go to 【Administration】>【Settings】>【display】 to set the project's language
    ![Redmine set language](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-language-websoft9.png)
 
-6. Go to 【administrator】>【Settings】>【user】 to set the user's language interface(is different from Project's language)
+6. Go to 【Administration】>【Settings】>【user】 to set the user's language interface(is different from Project's language)
    ![Redmine SSH key](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-userlanguage-websoft9.png)
+   
+7. Activate a new registered user: Go to【Administration】>【Users】, select a registered user in the 【Status】 option, and then activate the user, the user can log in.
 
 > More useful Redmine guide, please refer to [Redmine guide](https://www.redmine.org/projects/redmine/wiki/Guide)
 
