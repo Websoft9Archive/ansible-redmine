@@ -26,6 +26,8 @@
 
 6. 通过：【管理】>【配置】>【用户】，设置 Redmine 用户语言（区别于项目区语言）
    ![Redmine SSH key](https://libs.websoft9.com/Websoft9/DocsPicture/en/redmine/redmine-userlanguage-websoft9.png)
+   
+7. 激活新注册用户：通过【管理】>【用户】，在【状态】选项中选择 已注册用户，然后激活用户，该用户才能登陆。
 
 > 需要了解更多 Redmine 的使用和配置，请参考官方文档：[Redmine guide](https://www.redmine.org/projects/redmine/wiki/Guide)
 
